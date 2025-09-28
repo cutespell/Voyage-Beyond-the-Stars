@@ -1,0 +1,2526 @@
+
+body {
+  margin: 0;
+  padding: 0 15px;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: Georgia, serif;
+}
+
+.book-scene {
+  position: relative;
+  perspective: 2000px;
+  transition: transform 1s ease;
+}
+
+/* Book container */
+.book {
+  width: 630px;
+  height: 630px;
+  top:0%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(25deg) rotateY(-30deg) translateY(-20px);
+  transition:
+    transform 1s ease,
+    box-shadow 0.8s ease;
+  z-index: 5;
+}
+
+
+.book.opened {
+  transform: rotateX(15deg) rotateY(0deg) translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+
+
+/* Realistic hard red book base */
+.book-base {
+  position: absolute;
+  width: 636px;       /* Match book width */
+  height: 633px;       /* Just thick enough to look like a base */
+  background: linear-gradient(
+    to bottom,
+    #4b0000 0%,
+    #800000 30%,
+    #a70000 70%,
+    #5e0000 100%
+  );
+  border-radius: 0 10px 10px 10px;
+  top: 7px;
+  bottom: 0;
+  left: 54%;
+  transform: translateX(-50%) rotateX(25deg) rotateY(-30deg) translateY(0px);
+  z-index: 1;
+  opacity: 1;
+  transition:
+    transform 1s ease,
+    opacity 0.8s ease;
+}
+
+
+
+
+/* When book is opened, match angle */
+.book.opened + .book-base {
+  transform: translateX(-50%) rotateX(15deg) rotateY(0deg) translateY(0px);
+  opacity: 0.7;
+}
+
+
+/* Base page styles */
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: left top;   /* lock pages to spine top */
+  font-family: Georgia, serif;
+  padding: 20px;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+  border-radius: 5px;
+  color: #f8f806;
+  z-index: 3;
+  overflow: hidden;
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-right: 1px solid #500202;
+  border-bottom: 1px solid #500202;
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1),
+              box-shadow 0.6s ease;
+}
+
+
+
+.page::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Alternate edge color for even pages (slightly gray) */
+.page:nth-child(even) {
+  border-right: 3px solid #faf6f6;
+  border-bottom: 1px solid #faf6f6;
+}
+
+
+
+
+
+.page.cover {
+  background: url("cv.jpg") no-repeat center center;
+  background-size: 100% 100%;   /* makes sure it fills the entire page */
+  background-position: center; /* keeps it centered */
+  background-attachment: scroll; /* optional: set to fixed for parallax */
+  
+  color: white;
+  text-align: center;
+  z-index: 10;
+  border: 2px solid #200000;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    inset 0 0 12px rgba(255, 255, 255, 0.08),
+    inset 0 0 4px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+
+
+
+
+/* Inner glow on cover */
+.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10px;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  z-index: 5;
+}
+
+
+
+.book.opened .cover::after {
+  opacity: 0;
+}
+
+
+
+/* Turned page */
+.page.turned {
+  transform: rotateY(-180deg);
+}
+
+
+
+/* Button styling */
+.cover button  {
+  position: absolute;
+  bottom: 30px;
+  right: 26px;
+  padding: 8px 16px; /* keep original size */
+  background: #510303ab;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  /* smaller neon glow */
+  box-shadow: 
+    0 0 4px #2200ffdc,
+    0 0 8px #0b014adc,
+    0 0 16px #0b014adc;
+
+  transition: all 0.3s ease;
+  animation: floaty 3s ease-in-out infinite;
+  z-index: 50;
+}
+
+.cover button:hover {
+  box-shadow: 
+    0 0 4px #fa0101,
+    0 0 8px #ff0000c4,
+    0 0 16px #ff0000;
+  color: #ffccff;
+  transform: scale(1.05);
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); } /* smaller float for subtle effect */
+}
+
+
+
+
+
+/* Decorative corner images */
+.cover .corner-top,
+.cover .corner-bottom {
+  position: absolute;
+  width: 61px;
+  transform: rotate(137deg);
+  filter: drop-shadow(0 0 3px rgba(255,255,255,0.3));
+  opacity: 0.95;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.cover .corner-top {
+  top: -46px;
+  right: -12px;
+}
+
+.cover .corner-bottom {
+  bottom: -51px;
+  right: -10px;
+  transform: rotate(-134deg);
+}
+
+
+
+
+
+
+/* ========== Dust Particle Effect ========== */
+.dust {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  animation: floatUp 3s linear forwards;
+  pointer-events: none;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-150px) scale(0.2); opacity: 0; }
+}
+
+
+
+
+/* Page numbers alignment */
+.page-number {
+  position: absolute;
+  bottom: 18px;
+  font-size: 14px;
+  font-style: italic;
+  color: rgb(255, 255, 255);
+    font-family: Georgia, serif;
+}
+.page.left .page-number { left: 30px; }
+.page.right .page-number { right: 30px; }
+
+/* Smooth stagger animation (JS handles timing) */
+.page.turning {
+  transition-delay: 0.15s;
+}
+
+.magic-dust-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.sparkle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  animation: floatUp 2s linear forwards;
+}
+
+
+
+
+.sparkle.orb {
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, rgba(255,255,150,0.9) 0%, rgba(255,215,0,0.3) 70%, transparent 100%);
+  box-shadow: 0 0 15px rgba(255,255,150,0.7);
+}
+
+.sparkle.dust {
+  width: 3px;
+  height: 3px;
+  background: rgba(255,255,200,0.8);
+  box-shadow: 0 0 5px rgba(255,255,200,0.8);
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(0.5);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.book-cover {
+  position: relative;
+  width: 500px;  /* adjust to your cover size */
+  height: 800px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#magic-stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* so clicks pass through */
+}
+
+
+
+
+
+.page .page-btn {
+  position: absolute;
+  bottom: -3px;
+  right:-20px;
+  width: 110px;
+  height: 80px;
+  background: url('n.webp') no-repeat center;
+  background-size: 3.8rem;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 10px #00c8ff);
+  transition: transform 0.3s ease, filter 0.3s ease;
+    animation: floaty 3s ease-in-out infinite; /* optional float effect */
+}
+
+.page-btn:hover {
+  transform: scale(1.1) rotate(-5deg);
+  filter: drop-shadow(0 0 20px #ff0000);
+}
+
+
+
+/* Subtitle container */
+.subtitle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-top: 70px;
+  font-size: 1.3rem;
+  color: #f7f8f660;
+  height: 1.5em; /* keeps space reserved, avoids jumping */
+  overflow: visible;
+}
+
+/* Subtitle lines */
+.subtitle span {
+  position: absolute;
+  opacity: 0;
+  white-space: nowrap;
+  animation: fadeText 6s ease-in-out infinite;
+}
+
+/* Second line delayed */
+.subtitle span:nth-child(2) {
+  animation-delay: 3s;
+}
+
+/* Smooth fading keyframes */
+@keyframes fadeText {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }  /* fade in */
+  45%  { opacity: 1; }  /* stay visible */
+  60%  { opacity: 0; }  /* fade out */
+  100% { opacity: 0; }
+}
+
+
+
+
+.chapter-content {
+  
+  width: 100%;              /* fills the page width minus padding */
+  height: 100%;             /* fills the page height minus padding */
+  box-sizing: border-box;   /* ensures padding is included in size */
+  padding: 20px;            /* consistent inner spacing */
+  overflow: auto;           /* scroll if content overflows */
+  text-align: justify;      /* optional: nice text alignment */
+  color: inherit;           /* inherit from page */
+  font-family: Georgia, serif;
+  border: none;             /* optional: can add border if needed */
+}
+
+.page-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+
+.page-content.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden {
+  display: none; /* keep invisible until JS activates */
+}
+
+
+.dropcap {
+  font-size: 2.5rem;       /* Bigger than normal text */
+  line-height: 1;
+  font-weight: bold;
+  font-family: 'Cinzel Decorative', serif; /* Matches your book style */
+  color: rgb(255, 0, 0);            /* Or any accent color */
+  text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.941);
+}
+
+
+
+
+.back-btn {
+  position: absolute;
+  bottom:-5px;
+  right:40px;
+  width: 110px;
+  height: 80px;
+  background: url('b.webp') no-repeat center;
+  background-size: 4rem;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 0 10px #00c8ff);
+  transition: transform 0.3s ease, filter 0.3s ease;
+    animation: floaty 3s ease-in-out infinite; /* optional float effect */
+}
+
+.back-btn:hover {
+  transform: scale(1.1) rotate(-5deg);
+  filter: drop-shadow(0 0 20px #ff0303);
+}
+
+
+
+
+
+
+.storybook-heading {
+  position: relative;
+  font-family:  'Cinzel Decorative', serif;
+  font-size: 2.3rem;
+  text-align: center;
+  opacity: 3;
+  color: #fcfcfc;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.971), 0 0 30px rgba(255, 17, 0, 0.549);
+}
+
+
+/* Magical Intro without cursor */
+.magical-intro {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #f0f0ff;
+  text-shadow: 0 0 10px #fff, 0 0 15px #7be, 0 0 20px rgb(7, 0, 44);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  min-height: 200px; /* to reserve space */
+  padding-right: 5px;
+}
+
+.magical-intro p {
+  opacity: 0;
+  transition: opacity 1s ease;
+  margin: 0 0 1.2em 0;
+}
+
+
+.in-box
+{background-color: #0000006c;
+padding: auto;}
+
+.prologue-gate {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+/* Prologue Title */
+.prologue-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffdf6c, #ffd700, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  display: block;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  opacity: 1;
+
+}
+
+/* Prologue Subtitle */
+.prologue-sub {
+   font-family: 'My Soul', cursive;
+  font-size: 1.3rem;
+  color: #e6e6e6;
+  text-shadow: 0 0 15px #00c8ff, 0 0 30px #0066cc;
+  font-weight: 700;
+  opacity: 1;
+  text-align: center;
+  display: block;
+  margin-bottom: 8px;
+}
+
+
+
+
+
+@keyframes fadeInTitle {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+
+/* Gates start hidden */
+.page.page2.pb2-scope .gates .gate {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+}
+
+/* Gates visible after stagger */
+.page.page2.pb2-scope .gates .gate.pb-gate-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+
+/* ========================= Gates Container ========================= */ 
+.gates {
+   margin-top: 30px;
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px 40px; 
+    justify-items: center; 
+    width: 100%; } /* Stretch last two gates across both columns */ 
+
+    
+    .gate:nth-last-child(2), 
+    .gate:last-child { grid-column: span 2; max-width: none; }
+
+
+/* Gate Titles */ .gate-title {
+   font-family: 'MedievalSharp', cursive; 
+   font-size: 1.3rem; display: block; 
+   margin-bottom: 5px; background: linear-gradient(90deg, #ffd700, #fff1a8); 
+   -webkit-background-clip: text; 
+   -webkit-text-fill-color: transparent; 
+   text-shadow: 0 0 12px rgba(255, 223, 0, 0.8); 
+   opacity: 1; /* visible immediately, no separate animation */ } 
+   
+   /* Gate Subtitles */ 
+.gate-sub {
+   font-family: 'Grenze Gotisch', cursive;
+  font-size: 1rem; color: rgb(255, 255, 255); 
+   text-shadow: 0 0 20px #ffeaa7, 0 0 40px #4ac0f3;
+   opacity: 0.85; }
+
+
+
+/* Hover effect on gates */
+.gate:hover .gate-title {
+  text-shadow: 0 0 20px gold, 0 0 40px orange;
+  transform: scale(1.05);
+}
+
+.gate {
+  opacity: 0;
+  cursor: pointer;
+  text-align: center;
+  max-width: 280px;
+  transform: translateY(20px);
+
+}
+
+
+/* Fade-in effect when active */
+.gate.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+
+
+/* Page 3 Title */
+.page3-title {
+   font-family: 'Grenze Gotisch', cursive;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffdf6c, #ffffff, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3.4em;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 0 20px #ffeaa7, 0 0 40px #dfe6e9;
+  position: relative;
+  margin: 5px 0 5px 0;
+  opacity: 1;
+  animation: page3GlowPulse 4s infinite alternate;
+  animation-play-state: running; /* let it animate */
+}
+
+/* Title Shimmer */
+.page3-title::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(254, 255, 255, 0.697), transparent);
+  animation: shimmer 3s infinite;
+}
+
+
+
+/* Page 3 Paragraph Animations */
+/* Container background for all paragraphs at once */
+.page3-intro-text {
+  background: rgba(0, 0, 0, 0.55); /* soft dark overlay */
+  padding: 10px 10px; /* space around text */
+  border-radius: 15px; /* rounded corners */
+  display: inline-block; /* shrink to content width */
+  max-width: 70p0x; /* optional: limits width */
+  box-shadow: 0 0 20px rgba(254, 253, 253, 0.644); /* subtle glow */
+  margin: 0 auto 30px auto; /* top margin adds space from planet names */
+}
+
+/* Paragraph styling inside container */
+.page3-intro-text p {
+  font-size: 1.1rem;
+  color: #f1f1f1;
+  margin-bottom: 10px;
+  line-height: 1.6;
+  text-shadow: 0 0 8px rgba(0,0,0,0.934);
+  opacity: 1;}
+
+
+.x
+  {  font-family: 'Fleur De Leah', cursive; 
+    font-weight: bold;
+  font-size: 1.5rem; color: rgb(252, 199, 41); 
+  text-shadow: 0 0 8px rgba(200,200,200,0.6);
+  }
+
+.a
+ { font-family: 'MedievalSharp', cursive;  
+    font-weight: bold;
+  font-size: 1.3rem; color: rgb(252, 199, 41); 
+  text-shadow: 0 0 8px rgba(200,200,200,0.6);
+  }
+
+  .s{   font-weight: bold;
+   color: rgb(123, 255, 167);
+   font-size: 1.1rem;
+    text-shadow: 0 0 3px #012004, 0 0 4px #ffffff;}
+
+/* Example animations */
+@keyframes page3GlowPulse {
+  from { text-shadow: 0 0 10px #f9e850, 0 0 20px #53ccff; }
+  to   { text-shadow: 0 0 25px #df4ce198, 0 0 50px #ffa7e9; }
+}
+
+@keyframes shimmer {
+  from { left: -150%; }
+  to   { left: 150%; }
+}
+
+.bb {background-color: #44434329;
+}
+
+
+/* Planet Name Above */
+.planet-name {
+  font-weight: bold;
+  font-size: 16px;
+ font-family: 'Cinzel Decorative', serif;
+  background: linear-gradient(90deg, #ff10bf, #04fbe2, #f9ed6d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  display: block;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  animation: 2.5s ease-in-out infinite alternate;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Planet Quote Below */
+.planet-quote {
+ font-family: 'MedievalSharp', cursive; 
+  font-size: 14px;
+    background: linear-gradient(90deg, #ffdf6c, #fffffe, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  text-align: center;
+  margin-top: 25px;
+  max-width: 130px;
+  display: inline-block;
+  pointer-events: none;
+  animation: fadeQuote 4s ease-in-out infinite alternate;
+}
+
+
+
+
+.planets {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 36px;
+  max-width: 50%;
+  padding-left: 5px;
+}
+
+
+
+.planet-block {
+  flex: 1;               /* each block takes equal space */
+  max-width: 110px;      /* keeps them consistent */
+  text-align: center;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+
+.planet-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: auto;
+  animation: orbitMotion 8s linear infinite;
+}
+
+@keyframes orbitMotion {
+  0%   { transform: rotate(0deg)   translateX(15px) rotate(0deg);   filter: brightness(1); }
+  25%  { transform: rotate(90deg)  translateX(15px) rotate(-90deg); filter: brightness(1.3); }
+  50%  { transform: rotate(180deg) translateX(15px) rotate(-180deg);filter: brightness(1); }
+  75%  { transform: rotate(270deg) translateX(15px) rotate(-270deg);filter: brightness(0.8); }
+  100% { transform: rotate(360deg) translateX(15px) rotate(-360deg);filter: brightness(1); }
+}
+
+
+
+.pluto-orb   { background: radial-gradient(circle, #74b9ff, #0984e3); animation: orbitMotion 5s linear infinite; }
+.eris-orb    { background: radial-gradient(circle, #a29bfe, #6c5ce7); animation: orbitMotion 8s linear infinite; }
+.haumea-orb  { background: radial-gradient(circle, #ffeaa7, #fdcb6e); animation: orbitMotion 7s linear infinite; }
+.makemake-orb{ background: radial-gradient(circle, #fab1a0, #d63031); animation: orbitMotion 9s linear infinite; }
+.ceres-orb   { background: radial-gradient(circle, #dfe6e9, #636e72); animation: orbitMotion 11s linear infinite; }
+
+
+
+
+.planet-block:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+
+
+@keyframes orbitGlow {
+  from { box-shadow: 0 0 10px #fff; transform: rotate(0deg); }
+  to   { box-shadow: 0 0 25px #fff, 0 0 50px #6c5ce7; transform: rotate(10deg); }
+}
+ 
+
+
+
+@keyframes glitchPulse {
+  0%   { text-shadow: 0 0 5px #999; }
+  50%  { text-shadow: 0 0 15px #6c5ce7, 2px 2px 10px #ff7675; }
+  100% { text-shadow: 0 0 5px #999; }
+}
+
+
+
+
+/* Pluto orb */
+.pluto-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #74b9ff, #0984e3);
+  box-shadow: 0 0 20px rgba(116,185,255,0.8);
+  position: relative;
+  z-index: 2;
+  overflow: hidden; /* for landed snow inside the planet */
+}
+
+/* Wrapper */
+.pluto-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 80px; /* Pluto’s width */
+  height: 80px;
+}
+
+.snow-container {
+  position: absolute;
+  top: 30px;
+  left: 10px;       /* start at left edge of Pluto */
+  width: 60px;   /* same as Pluto */
+  height: 3px;
+  pointer-events: none;
+  overflow: visible;
+    animation: orbitMotion 5s linear infinite;
+}
+
+
+.snow-behind {
+  z-index: 1;
+}
+.snow-front {
+  z-index: 3;
+}
+
+/* Each snowflake ❄ */
+.snowflake {
+  position: absolute;
+  top: -3px;
+  color: white;
+  font-size: 2px;
+  opacity: 0.9;
+  user-select: none;
+  pointer-events: none;
+  animation: fall-snow linear infinite;
+}
+
+@keyframes fall-snow {
+  0% {
+    transform: translateY(-20px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(80px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+
+.planet-block .planet-name-eris {
+  position: absolute;
+  top: 0px;   
+  margin-bottom: 15px;
+  animation: 2.5s ease-in-out infinite alternate;
+  text-align: center;
+  pointer-events: none;
+}
+
+
+
+.planet-block-eris {
+  position: relative;
+  top: 95px;    /* adjust this value to move the quote up/down */
+  text-align: center;
+  margin-top: -25px;
+  max-width: 130px;
+  display: inline-block;
+  pointer-events: none;
+  animation: fadeQuote 4s ease-in-out infinite alternate;
+}
+
+.planet-name-eris{
+  font-weight: bold;
+  font-size: 16px;
+ font-family: 'Cinzel Decorative', serif;
+  background: linear-gradient(90deg, #ff10bf, #04fbe2, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255, 255, 254, 0.978);
+  display: block;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+
+.planet-quote-eris {
+     position: relative;
+  font-family:'MedievalSharp', cursive; 
+  top: 70px;    /* adjust this value to move the quote up/down */
+  font-size: 14px;
+       background: linear-gradient(90deg, #ffdf6c, #fffffe, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  left: -20px;
+  margin-top: 8px;
+  max-width: 130px;
+  display: inline-block;
+  pointer-events: none;
+  animation: fadeQuote 4s ease-in-out infinite alternate;
+}
+  
+
+.eris-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  animation: orbitMotion 8s linear infinite;
+  top: 60px;
+}
+
+.aurora {
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160, 157, 157, 0.885) 0%, rgba(75, 75, 77, 0.8) 70%);
+  z-index: 0; /* bottom layer */
+  pointer-events: none;
+  animation: auroraPulse 6s ease-in-out infinite;
+}
+
+.eris-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #cceeff 0%, #99ccff 80%);
+  box-shadow: 0 0 15px rgba(204,238,255,0.6);
+  position: relative;
+  z-index: 2; /* middle */
+}
+
+.eris-fall {
+  position: absolute;
+  top: 3px;
+  width: 55px;
+  height: 120px;
+  overflow: visible;
+  pointer-events: none;
+   animation: orbitMotion 8s linear infinite;
+}
+
+.eris-fall.back {
+  z-index: 1; /* between aurora and orb */
+}
+
+.eris-fall.front {
+  z-index: 3; /* above orb */
+}
+
+.shard {
+  position: absolute;
+  top: 40px;
+  left: 6px;
+  color: #cceeff;
+  opacity: 0.8;
+  pointer-events: none;
+  user-select: none;
+  animation: shardFall linear forwards;
+}
+
+@keyframes shardFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+}
+
+
+
+
+
+
+.haumea-system {
+  position: relative;
+  top: 60px;   /* adjust this value to move Haumea planet up/down */
+   animation: orbitMotion 7s linear infinite;
+}
+
+
+/* Move Haumea quote */
+.planet-block .planet-quote-haumea {
+  position: relative;
+  top: 105px;    /* adjust this value to move the quote up/down */
+  text-align: center;
+  margin-top: 8px;
+  max-width: 130px;
+  display: inline-block;
+  pointer-events: none;
+  animation: fadeQuote 4s ease-in-out infinite alternate;
+}
+.planet-quote-haumea {
+ font-family: 'MedievalSharp', cursive; 
+    background: linear-gradient(90deg, #ffdf6c, #fffffe, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);}
+
+/* Planet itself */
+.planet::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  width: 100px;
+  height: 70px; /* egg-shaped */
+  border-radius: 50% / 50%;
+  background: radial-gradient(circle at center, #b3e0ff 0%, #66c2ff 80%);
+  box-shadow: 0 0 20px rgba(179,224,255,0.6);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Planet wrapper */
+.planet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+
+/* Planet itself */
+.planet::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 70px; /* egg-shaped */
+  border-radius: 50% / 50%;
+  background: radial-gradient(circle at center, #b3e0ff 0%, #66c2ff 80%);
+  box-shadow: 0 0 20px rgba(179,224,255,0.6);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* Ring stays attached around the planet */
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130px;  
+  height: 100px;  
+  border-radius: 50%;
+  border: 15px solid rgba(204, 238, 255, 0.5);
+  background: transparent;
+  transform: translate(-50%, -50%) rotateX(70deg);
+  z-index: 1;
+  animation: ringRotate 8s linear infinite;
+}
+
+/* Rotate ring continuously */
+@keyframes ringRotate {
+  0%   { transform: translate(-50%, -50%) rotateX(70deg) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotateX(70deg) rotate(360deg); }
+}
+
+.haumea-snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 160px;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 3;
+}
+
+
+/* First pseudo-element - base flakes */
+.haumea-snow::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  box-shadow:
+    0 0 white,
+    5px 10px white,
+    -8px 20px white,
+    12px 30px white,
+    -5px 40px white,
+    7px 50px white,
+    -10px 60px white,
+    3px 15px white,
+    -6px 25px white,
+    9px 35px white;
+  animation: haumeaSnow 2s linear infinite;
+}
+
+/* Second pseudo-element - more flakes with different speed */
+.haumea-snow::after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  box-shadow:
+    -3px 5px white,
+    6px 15px white,
+    -10px 25px white,
+    8px 35px white,
+    -6px 45px white,
+    5px 55px white;
+  animation: haumeaSnow 3s linear infinite;
+  left: 50%;
+}
+
+/* Snowfall animation */
+@keyframes haumeaSnow {
+  0%   { transform: translateY(0px) scale(0.5); opacity: 0.8; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(80px) scale(0.3); opacity: 0; }
+}
+
+/* Snowflake style */
+.haumea-snow .flake {
+  position: absolute;
+  top: 10px;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall linear infinite;
+}
+
+/* falling animation */
+@keyframes fall {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) scale(0.5);
+    opacity: 0;
+  }
+}
+
+
+
+
+.makemake-particles {
+  position: absolute;
+  top: 8px;
+  left: 18px;
+  width: 60px; /* same as planet width */
+  height: 80px;
+  pointer-events: none;
+  overflow: visible;
+    animation: orbitMotion 9s linear infinite;
+}
+
+.makemake-particle {
+  position: absolute;
+  top: 35px;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.6;
+  font-size: 30px;
+  color: #490202; /* reddish dust */
+  animation: dustFall linear forwards;
+}
+
+.makemake-spark {
+  position: absolute;
+  top: 35px;
+  font-size: 7px;
+  color: #f2d397; /* glowing spark */
+  opacity: 0.8;
+  pointer-events: none;
+  user-select: none;
+  animation: sparkFall linear forwards;
+}
+
+@keyframes dustFall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+  100% { transform: translateY(80px) rotate(180deg); opacity: 0; }
+}
+
+@keyframes sparkFall {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.9; }
+  100% { transform: translateY(100px) scale(0.5); opacity: 0; }
+}
+
+/* 3D water-rich orb */
+.ceres-orb {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a0e5ff 0%, #1ca6d9 70%, #0b4f6c 100%);
+  animation: orbitMotion 11s linear infinite; 
+  box-shadow: 0 0 20px rgba(28,166,217,0.6), inset -5px -5px 15px rgba(255,255,255,0.2);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+@keyframes waterSurface {
+  0% { transform: rotateX(0deg) rotateY(0deg); }
+  50% { transform: rotateX(2deg) rotateY(2deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg); }
+}
+
+/* Blue-green aura glow */
+.ceres-orb::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,255,0.2) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  animation: auraPulse 6s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.05); opacity: 0.35; }
+}
+
+/* Mist / ice particle container */
+.ceres-mist {
+  position: absolute;
+  bottom: 20px;  /* start just above surface */
+  left: -15px;
+  width: 90px;  /* same as planet width */
+  height: 20px; /* limited height so particles stay close */
+  pointer-events: none;
+  overflow: visible;
+    animation: orbitMotion 11s linear infinite;
+  
+}
+
+/* Individual mist/ice particles */
+.ceres-particle {
+  position: absolute;
+  bottom: 18px;
+  font-size: 30px;
+  color: #92ccf0;
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+  animation: mistRise linear forwards;
+}
+
+@keyframes mistRise {
+  0% { transform: translateY(0) scale(0.5); opacity: 0.6; }
+  50% { transform: translateY(-8px) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-15px) scale(1.2); opacity: 0; }
+}
+
+.last {
+  top: 200px;    /* adjust this value to move the quote up/down */
+  font-size: 14px;
+  color: #fcfcfc;
+
+}
+
+.planet-block .planet-quote-ceres {
+
+  position: relative;
+  font-family:'MedievalSharp', cursive; 
+  top: 6px;    /* adjust this value to move the quote up/down */
+  font-size: 14px;
+         background: linear-gradient(90deg, #ffdf6c, #fffffe, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  text-align: center;
+  margin-top: 8px;
+  max-width: 130px;
+  display: inline-block;
+  pointer-events: none;
+  animation: fadeQuote 4s ease-in-out infinite alternate;
+}
+
+
+/* Story container */
+.story-content {
+  display: none;
+  position: fixed;
+  box-sizing: border-box;
+  border-radius: 0;
+   overflow: hidden; 
+  color: #fff;
+  z-index: 9999;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
+  top: 30px;
+  left: 30px;
+  
+
+}
+
+.magic-box {
+  background: #01013277;
+  font-weight: bold;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  text-align: justify;
+
+  /* Add spacing inside */
+  padding: 3px 3px; /* 30px top & bottom, 25px sides */
+
+  /* Optional: make box a bit wider */
+  margin: 0 auto; /* center horizontally */
+  
+  /* Optional: add some spacing above & below relative to title */
+  margin-top: 3px;
+  margin-bottom: 5px;
+}
+
+
+.story-content
+{margin-top: -10px;
+margin-left: 5px;
+margin-right: 30px;
+width: auto;
+height: auto;
+background: url(lll.webp);
+ background-size: 100% 100%;
+  background-position: center;}
+
+/* Inner text box */
+#story-text {
+  background:  #070000a6;
+  padding: 18px;
+ width: auto;
+  height: auto;
+  border-radius: 35px;
+  box-shadow: 0 0 35px #ffffff;
+  color: #fff;
+
+}
+
+/* Titles */
+#story-text h2, #story-text h3 {
+  margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+/* h2 specific */
+#story-text h2 {
+        font-family: 'Fleur De Leah', cursive;
+  font-size: 3rem;
+  color: #f5d1a0d2;
+    text-shadow: 0 0 8px #ffda77, 0 0 15px #ffd700;
+    text-align: center;
+}
+
+/* h3 specific */
+#story-text h3 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+    color: #38d9f9;
+  text-shadow: 0 0 8px #ffda77, 0 0 15px #f6f5f3;
+  margin-top: 15px;
+  text-align: center;
+}
+
+#story-text h4 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.2rem;
+    color: #ffda77;
+  text-shadow: 0 0 8px #ffda77, 0 0 15px #ffd700;
+  margin-top: 25px;
+  text-align: center;
+}
+
+/* Paragraphs with drop caps */
+#story-text p {
+  margin-bottom: 18px;
+  text-align: justify;
+}
+
+
+
+/* Blockquotes */
+#story-text blockquote {
+  border-left:3px solid #ffd700;
+  padding-left:15px;
+  margin:20px 0;
+  font-style: italic;
+  color: #ffe680;
+}
+
+
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #f0fc05;
+  z-index: 10;
+}
+
+/* Particle container */
+.story-effects {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+/* Particle style */
+.story-effects .particle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.9;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  z-index: 10;
+}
+
+/* Particle animations */
+@keyframes storyParticleFall {
+  0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes storyParticleRise {
+  0% { transform: translateY(100vh) scale(0.5); opacity: 0.6; }
+  50% { transform: translateY(50vh) scale(1); opacity: 0.8; }
+  100% { transform: translateY(0) scale(1.2); opacity: 0; }
+}
+
+
+
+
+
+.magic-box1 {
+  background: rgba(0, 0, 0, 0.56);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  text-align: center;
+  animation: floatBox 6s ease-in-out infinite alternate;
+
+   .special
+  { font-weight: bold; color: #f7f983ef; text-shadow: 0 0 2px #272626;  font-size: 1.1rem;margin-top: 5px;}
+.special1 {
+  font-weight: bold; color: #fd0202;text-shadow: 0 0 2px #fafafa;  font-size: 1.4rem;margin-top: 5px;}
+
+}
+
+
+
+
+
+.chapter-one {
+  color: #eee;
+  font-family: 'Poppins', sans-serif;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.chapter-one h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+    color: #ffda77;
+  text-shadow: 0 0 8px #ffda77, 0 0 15px #ffd700;
+  margin-bottom: 15px;
+}
+
+.chapter-one p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.chapter-one hr {
+  margin: 20px 0;
+  border: 1px solid #555;
+}
+
+.chapter-one .ending {
+  font-size: 1rem;
+  font-style: italic;
+   color: #ecfa85;
+     text-shadow: 0 0 5px #8af8eda8, 0 0 7px #2988b4a7, 0 0 9px #ffffff7d;
+     font-weight: bold;
+}
+
+.chapter-one .chapter-end {
+  font-size: 1.3rem;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+
+
+
+.chapter2 .magic-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.4rem;
+  color: #ffd700;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 40px #fff;
+  margin-bottom: 20px;
+  animation: shimmer 3s infinite linear;
+}
+
+.chapter2 .magic-subtitle {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3rem;
+  color: #ffda77;
+  text-shadow: 0 0 8px #ffda77, 0 0 15px #ffd700;
+  margin-bottom: 20px;
+  animation: shimmer 3s infinite linear;
+}
+
+/* Cosmic highlights */
+.chapter2 .cosmic { font-weight: bold; color: #80d0ff; text-shadow: 0 0 8px #80d0ff; }
+.chapter2 .hook { display: block; margin: 10px 0; font-style: italic; color: #ff9999; font-size: 1rem; text-align: center; }
+.chapter2 p { 
+  color: #eee;
+  border-radius: 12px;
+  text-align: justify;
+  padding: 5px;
+  font-size: 1.15rem;
+  margin: 5px 0;
+    line-height: 1.5;
+}
+.chapter2 h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.5rem;
+    color: #ffda77;
+  text-shadow: 0 0 8px #ffda77, 0 0 15px #ffd700;
+  margin-bottom: 15px;
+}
+
+
+
+.magic-box2 {
+  background: rgba(255, 255, 255, 0.56);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.3;
+   color: #070125;
+
+.special1 {
+  font-weight: bold; color: #fd0202;text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6) ;
+   font-size: 1rem;
+}
+
+.highlight
+ { font-weight: bold; color: #043385fc; }
+
+ .special
+  { font-weight: bold; color: #ff0000ef; text-shadow: 0 0 3px #fafafa;  font-size: 1rem;margin-top: 5px;}
+
+.highlight1
+ { font-weight: bold; color: #0e0378fc;font-size: 1rem; }
+
+}
+
+
+
+
+
+/* Magic Letter Icon */
+.letter-image {
+  position: fixed;
+  bottom: -10px;
+  right: 30px;
+    height: auto;
+  display: block;
+  cursor: pointer;
+  z-index: 1000;
+  animation: floatIcon 2s ease-in-out infinite alternate;
+    width: 100px;   /* adjust size */
+}
+
+@keyframes floatIcon {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-10px); }
+}
+
+
+
+/* Hidden Message Box */
+.message-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 500px;
+  padding: 25px;
+  backdrop-filter: blur(10px) saturate(180%);
+  box-shadow: 0 0 50px rgba(0,0,0,0.5), inset 0 0 30px rgba(255,255,255,0.1);
+  overflow: hidden;
+  z-index: 2000;
+  transition: all 0.5s ease;
+  opacity: 0;
+  background: url(letter\ 1.png);
+  background-size: 100% 100%;
+  background-position: center;
+  text-align: center;
+}
+
+
+
+/* Show popup */
+.message-box.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+
+/* Greeting */
+.speciall {
+  font-family: 'Fleur De Leah', cursive;
+  font-size: 2rem;
+  color: #1e0c00;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 40px #fff;
+  margin-top: 60px;   /* move up/down */
+  margin-bottom: 60px;
+
+}
+
+/* Main Message */
+.msg {
+  font-family: 'Grenze Gotisch', cursive;
+  font-size: 1rem;
+  color: #050000;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 40px #fff;
+  margin: 0 auto 0 auto; /* center + spacing below */
+  line-height: 1.6;
+  width: 60%;
+
+}
+
+/* User Message Textarea */
+.user-msg {
+  min-height: 120px;
+  min-width: 60%;
+  padding: 20px;
+  margin: -15px auto 0 auto;
+  display: block;
+  font-family: 'Patrick Hand', 'Comic Sans MS', cursive;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #0c291b;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 40px #fff;
+  font-weight: bold;
+  text-align: center;
+  background: none;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow-y: auto;         /* Scroll if content is too tall */
+}
+
+
+/* Placeholder Styling */
+.user-message::placeholder {
+  color: #393737;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  opacity: 0.85;
+  cursor: text;
+  margin-top: auto;
+}
+
+/* Make sure non-input areas don't look clickable */
+.message-box,
+.speciall,
+.msg {
+  cursor: default; /* normal arrow */
+}
+
+
+
+/* Send Button */
+.send-btn1 {
+  margin: 40px auto 50px auto;   /* control position */
+  display: block;
+  background: linear-gradient(135deg, #3b1b01, #845924, #ffda77);
+  border: none;
+  padding: 15px 15px;
+  font-family: 'Fleur De Leah', cursive;
+  font-size: 1.3rem;
+  color: #031508;
+  font-weight: bold;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffae00, 0 0 40px #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7), 0 5px 15px rgba(0,0,0,0.25);
+  transition: all 0.4s ease, transform 0.2s ease;
+}
+
+/* Shimmer effect on hover */
+.send-btn1::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 70%);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+
+.send-btn1:hover::before {
+  opacity: 1;
+  animation: shimmerButton 2s infinite linear;
+}
+
+@keyframes shimmerButton {
+  0% { transform: rotate(45deg) translate(-200%, -200%); }
+  100% { transform: rotate(45deg) translate(200%, 200%); }
+}
+
+/* Hover scaling */
+.send-btn1:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 35px rgba(216, 3, 3, 0.875), 0 5px 15px rgba(0,0,0,0.35);
+}
+
+
+.upload-popup {
+  position: fixed;
+  top: 50%;          /* vertical position */
+  left: 41%;         /* horizontal position */
+  transform: translate(-50%, -50%); /* center perfectly */
+  background: rgba(0,0,0,0.6);
+  padding: 25px;
+  border-radius: 15px;
+  z-index: 4000;
+}
+.upload-popup img {
+  width: 120px;
+  height: auto;
+}
+
+/* Success GIF */
+.success-popup {
+  position: fixed;
+  top: 50%;          /* vertical position */
+  left: 41%;         /* horizontal position */
+  transform: translate(-50%, -50%);
+  background: transparent; /* only gif */
+  padding: 0;
+  z-index: 4000;
+}
+.success-popup img {
+  width: 150px;
+  height: auto;
+}
+
+
+
+
+.magic-box3 {
+  background: rgba(1, 10, 43, 0.667);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.4;
+   color: #fbfbfc;
+
+.special1 {
+  font-weight: bold; color: #ffffff; text-shadow: 0 0 5px rgba(255,215,0,0.9), 0 0 10px rgba(255,215,0,0.6);}
+   
+
+.highlight
+ { font-weight: bold; color: #f2f928fc;}
+ .special
+  { font-weight: bold; color: #e7ff0f; text-shadow: 0 0 5px #fafafa; margin-top: 5px;text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);}
+   
+   .special3
+  { font-weight: bold; color: #e7ff0f; text-shadow: 0 0 5px #fafafa; margin-top: 5px;text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);font-size: 1.4rem;}
+   
+}
+
+.magic-box4 {
+  background: rgba(12, 120, 244, 0.553);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.4;
+   color: #000000;
+
+.highlight {
+  font-weight: bold; color: #fcfc32;text-shadow: 0 0 15px rgba(245, 169, 169, 0.9), 0 0 30px rgba(237, 31, 31, 0.942);
+}
+
+.special1
+ { font-weight: bold; color: #fa0303fc; text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);}
+
+ .special3
+ { font-weight: bold; color: #fffcfc; text-shadow: 0 0 15px rgb(255, 0, 0), 0 0 30px rgba(255, 0, 0, 0.6);font-size: 1.4rem;}
+
+ .special
+  { font-weight: bold; font-size: 1.4rem; color: #fcfc32;text-shadow: 0 0 15px rgba(245, 169, 169, 0.9), 0 0 30px rgba(237, 31, 31, 0.942) ;
+}
+}
+
+.magic-box5 {
+  background: rgba(255, 4, 4, 0.164);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.4;
+   color: #e7e2ad;
+
+
+.special2
+  {font-weight: bold;font-size: 1.1rem; color: #f2f772;text-shadow: 0 0 15px rgba(240, 212, 57, 0.9), 0 0 30px rgb(247, 15, 7) ;
+}
+
+.special
+  {font-weight: bold; color: #010437;font-size: 1.4rem; text-shadow: 0 0 15px rgba(247, 244, 89, 0.9), 0 0 30px rgb(255, 255, 255);text-align: center;
+}
+
+.highlight
+ { font-weight: bold; color: #e1ff00fc; }
+
+ .special1
+  { font-weight: bold; color: #e6fa05; margin-top: 5px; }
+}
+
+
+
+.magic-box6 {
+  background: rgba(0, 0, 0, 0.574);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.4;
+   color: #ffffff;
+
+
+.special1 {
+  font-weight: bold; color: #00fcda;text-shadow: 0 0 15px rgba(240, 240, 240, 0.9), 0 0 30px rgba(251, 249, 240, 0.6); font-size: 1.2;
+}
+.special3 {
+  font-weight: bold;font-size: 1.15rem; color: #e5ff00;text-shadow: 0 0 15px rgba(240, 240, 240, 0.9), 0 0 30px rgba(251, 7, 7, 0.6);
+}
+
+.highlight
+ { font-weight: bold; color: #dcfe53; }
+
+ .special2
+  { font-weight: bold; color: #eaff02;  font-size: 1.1rem;margin-top: 5px;}
+}
+
+
+.magic-box7 {
+  background: rgba(2, 1, 36, 0.812);
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(251, 251, 251, 0.4);
+  animation: floatBox 6s ease-in-out infinite alternate;
+  line-height: 1.4;
+   color: #ffffff;
+
+
+.special1 {
+  font-weight: bold; color: #c7d95f;
+}
+
+.highlight
+ { font-weight: bold; color: #ffdf2cfc;   text-shadow: 0 0 10px rgba(255, 237, 170, 0.7);  }
+
+ .special2
+  { font-weight: bold; color: #eaff02;  font-size: 1.1rem;margin-top: 5px;}
+
+  .h1
+  { 
+     font-family: 'Cinzel Decorative', serif;
+   font-weight: bold; color: #ff0202dc; text-shadow: 0 0 3px #dbf761;  font-size: 1.1rem;margin-top: 5px;}
+  }
+
+
+
+
+
+
+
+/* Planet summary section */
+.page35
+
+/* Council conclusion */
+.council-conclusion {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1rem;
+  max-width: 600px;
+  line-height: 1.4;
+  font-style: italic;
+  color: #ddd;
+}
+
+.page36 .box {
+  margin: 15px auto;
+  padding: 10px;
+  border-radius: 15px;
+  background: rgba(120, 5, 5, 0.412);
+  max-width: 600px;
+   font-family: 'Patrick Hand', cursive;
+  color: #d0f7ff;
+    text-shadow: 0 0 10px rgba(255, 237, 170, 0.7); 
+  line-height: 1.3;
+}
+
+
+
+
+
+/* Planet Voices container */
+.page38 .planet-voices {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 15px;
+  background: rgba(20, 20, 30, 0.8);
+  max-width: 600px;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+}
+
+/* Individual planet voices */
+.page38 .pluto-voice {
+  color: #ff6666;   /* soft red */
+}
+
+.page38 .eris-voice {
+  color: #b366ff;   /* violet */
+}
+
+.page38 .haumea-voice {
+  color: #33cccc;   /* aqua */
+}
+
+.page38 .makemake-voice {
+  color: #ffb84d;   /* orange-gold */
+}
+
+.page38 .ceres-voice {
+  color: #66ff99;   /* green */
+}
+
+
+
+.page38-conclusion {
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-top: 20px;
+  color: #c0f0ff;
+  text-shadow: 0 0 10px rgba(192,240,255,0.5);
+  line-height: 1.8;
+}
+
+
+
+
+.page37-quote
+ {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #ffedaa;
+  margin: 15px 0;
+  text-shadow: 0 0 10px rgba(255, 237, 170, 0.7);
+}
+.page38-quote
+ {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #ffedaa;
+  margin: 15px 0;
+  text-shadow: 0 0 10px rgba(255, 237, 170, 0.7);
+}
+.page39-quote
+ {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #ffedaa;
+  margin: 15px 0;
+  text-shadow: 0 0 10px rgba(255, 237, 170, 0.7);
+}
+
+
+
+
+
+/* Floating icon image */
+.letter-image {
+  width: 80px;
+  height: auto;
+  animation: floatIcon 2s ease-in-out infinite alternate;
+  cursor: pointer;
+  right: 20px;
+  bottom: 10px;
+}
+
+/* Hidden popup */
+.final-message-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 500px;
+  height: 550px;
+  padding: 20px;
+  background: url(scroll_fully_transparent.png);
+   background-size: 100% 100%;
+  background-position: center;
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  z-index: 2000;
+  opacity: 0;
+}
+
+/* Show when open */
+.final-message-popup.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+
+
+
+.final-message-box p.story {
+  color: #ffd;
+  margin-bottom: 10px;
+}
+
+/* Placeholder Styling */
+.user-message::placeholder {
+  color: #393737;
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  opacity: 0.85;
+  text-align: center;
+}
+
+
+
+ .user-message {
+  width: 70%;
+  min-height: 120px;
+  padding: -20px;
+  border-radius: 10px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  color: #09012f;
+  text-shadow: 0 0 20px gold, 0 0 40px orange;
+  font-weight: bold;
+  resize: none;
+  background: none;
+  border: none;
+  outline: none;
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+
+/* Send Button */
+.final-message-box .send-btn {
+  background: linear-gradient(135deg, #ffccff, #020aff);
+  border:none;
+  color:#1a0d00;
+  font-family: 'Berkshire Swash', cursive;;
+  font-size:1rem;
+  font-weight:bold;
+  border-radius:12px;
+  cursor:pointer;
+  box-shadow: 0 0 15px rgba(255,102,204,0.6);
+  transition: all 0.3s ease;
+  padding: 12px 15px;
+  margin-left: 41%;
+  margin-top: 16%;
+}
+.final-message-box .send-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255,102,204,0.8);
+}
+
+/* Loading Popup */
+.loading-popup {
+  position: fixed;
+  top: 50%;
+  left: 41%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 15px;
+  z-index: 4000;
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
+}
+.loading-popup img {
+  width: 120px;
+  height: auto;
+}
+
+/* Success Popup */
+.sent-popup {
+  position: fixed;
+  top: 50%;
+  left: 41%;
+  transform: translate(-50%, -50%);
+  background: transparent; /* no box, only gif */
+  padding: 0;
+  z-index: 4000;
+}
+.sent-popup img {
+  width: 150px;
+  height: auto;
+}
+
+
+.legendary-quote {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1rem;      /* adjust size as needed */
+    font-weight: bold;        /* regular weight */
+    line-height: 1.2;
+   color :  #580202;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 70%;        /* optional: keep the text readable */
+    letter-spacing: 0.5px;
+    margin-top: 90px;
+}
+
+.legendary-quote {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4),
+                 0 0 15px rgba(255, 217, 0, 0.308);
+}
+
+
+.page40 .chapter-content {
+  font-family: 'Patrick Hand', cursive;
+  color: #d0f7ff;
+  line-height: 1.7;
+  text-align: center;
+    overflow: hidden; 
+}
+
+
+
+/* Author note styling */ 
+.author-note {
+   margin: auto; 
+   font-size: 1.5rem;
+   width: 450px;
+    height: 450px; 
+    padding: 20px;
+     background: rgba(1, 0, 29, 0.803);
+      border-radius: 15px; 
+      border: 2px solid rgba(255,255,255,0.2);
+       box-shadow: 0 0 25px rgba(255,255,255,0.3); } 
+
+.author-note p { margin: 3px 0; }
+
+.author-note .note-text { 
+  font-size: 1.2rem; 
+  font-style: italic; 
+  color: #ffedaa; 
+  text-shadow: 0 0 10px rgba(255, 237, 170, 0.7); }
+
+
+.story-titlep {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #00c8ff, 0 0 30px #022141;
+  letter-spacing: 4px;  
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitlep {
+  display: block;
+ font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem;
+  color: #0b0127;
+  font-style: italic;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titlep {
+  animation: pulseGlow 4s infinite alternate;
+}
+
+.story-subtitlep {
+  animation: fadeSlide 3s ease forwards;
+}
+
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 10px #00c8ff, 0 0 20px #0066cc; }
+  to { text-shadow: 0 0 25px #00e5ff, 0 0 45px #0088ff; }
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.page-content1 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+
+.story-titlee {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #00c8ff, 0 0 30px #0066cc;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitlee  {
+  display: block;
+ font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem;
+  color: #02011d;
+  font-style: italic;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titleh {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #00c8ff, 0 0 30px #0066cc;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitleh  {
+  display: block;
+ font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem;
+  color: #f4ffa5;
+  font-style: italic;
+  text-shadow: 0 0 10px rgba(244, 47, 47, 0.804),0 0 30px #060360;
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titlem {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #f9d663, 0 0 30px #fe6803;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitlem  {
+  display: block;
+  font-family: 'Berkshire Swash', cursive;
+  font-size: 2rem;
+  color: #f9f1b4;
+  font-style: italic;
+  text-shadow: 0 0 10px rgba(208, 177, 177, 0.804),0 0 30px #c08873;
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titlec {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #ff0000, 0 0 30px #ffed25;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitlec  {
+  display: block;
+ font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem;
+  color: #fefefe;
+  font-style: italic;
+  text-shadow: 0 0 10px rgba(235, 246, 124, 0.804),0 0 30px #e5a189;
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titlef {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 5rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #eb60c3, 0 0 30px #520439;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
+  text-align: center;
+ 
+}
+
+.story-subtitlef  {
+  display: block;
+ font-family: 'Berkshire Swash', cursive;
+  font-size: 2.3rem;
+  color: #ffffff;
+  font-style: italic;
+  text-shadow: 0 0 10px rgba(251, 242, 79, 0.905),0 0 30px #c08873;
+  text-align: center;
+  letter-spacing: 2px;
+
+}
+
+.story-titlef {
+  animation: pulseGlow 3s infinite alternate;
+}
+
+.story-subtitlef {
+  animation: fadeSlide 3s ease forwards;
+}
+
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 10px #be0662, 0 0 20px #6d0234; }
+  to { text-shadow: 0 0 25px #00e5ff, 0 0 45px #022d53; }
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.head {
+ font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffdf6c, #ff0000, #ffa8a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  display: block;
+  letter-spacing: 2px;
+  
+}
+
+.head1 {
+ font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #f70808, #0004ff, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  display: block;
+  letter-spacing: 2px;
+  
+}
+
+.head2 {
+ font-family: 'Cinzel Decorative', serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #dce85f, #f6f6f4, #fff1a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255,215,0,0.9), 0 0 30px rgba(255,215,0,0.6);
+  display: block;
+  letter-spacing: 2px;
+  
+}
+
+
+
+
+/* Button styling */
+.restart.button {
+  position: absolute;
+  bottom: 40px;
+  right: 26px;
+  padding: 8px 16px; /* keep original size */
+  background: #510303ab;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+
+  /* smaller neon glow */
+  box-shadow: 
+    0 0 4px #2200ffdc,
+    0 0 8px #0b014adc,
+    0 0 16px #0b014adc;
+
+  transition: all 0.3s ease;
+  animation: floaty 3s ease-in-out infinite;
+  z-index: 50;
+}
+
+.restart.button {
+  box-shadow: 
+    0 0 4px #fa0101,
+    0 0 8px #ff0000c4,
+    0 0 16px #ff0000;
+  color: #ffccff;
+  transform: scale(1.05);
+}
+@keyframes floaty {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); } /* smaller float for subtle effect */
+}
+
+
+
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+

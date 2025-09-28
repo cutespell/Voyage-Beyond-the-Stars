@@ -1,0 +1,2267 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- Example: top of your website -->
+
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voyage Beyond the Stars</title>
+  <link rel="icon" type="image/jpeg" href="logoo.png">
+  <link rel="stylesheet" href="bi.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=MedievalSharp&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/my-soul" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600;700&display=swap" rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+  (function(){
+    emailjs.init({
+      publicKey: "4AgCDkCVfQLzwew_Y", // your real public key
+    });
+  })();
+</script>
+
+
+
+</head>
+<body>
+  <div class="book-scene">
+     
+     <div class="magic-dust-container"></div>
+    <div class="book" id="book">
+      <!-- Pages -->
+      <div class="page cover" id="cover" data-page="0">
+          <canvas id="magic-stars"></canvas>
+
+<div class="subtitle">
+  <span>Whispers of the Forgotten Worlds</span>
+  <span>Where Shadows Keep Their Stories</span>
+
+</div>
+
+    
+        <button onclick="nextPage()" aria-label="Open Book">Open Book</button>
+        <!-- Inside the #cover page div -->
+        <img src="1.png" class="corner-top" alt="Top Cover Protector" />
+        <img src="1.png" class="corner-bottom" alt="Bottom Cover Protector" />
+      </div>
+
+
+
+<div class="page page1 lazy-bg" data-page="1" data-bg="1pg.webp" style="background-position: center; background-size: 100% 100%;">
+
+  <div class="page-content">
+ 
+<h1 class="storybook-heading">The Journey Through the Forgotten Frontier</h1>
+
+
+  <!-- Container for typewriter -->
+  <div class="magical-intro"></div>
+
+  </div>
+
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<script>
+  const textLines = [
+  "Not all journeys begin with footsteps. . .",
+  "Some begin with shadows, silence, and the pull of forgotten worlds.",
+  "The gates are now stand open. . . Beyond them lie exile, mystery, and legends carved in ice.",
+  "Welcome, traveler👩‍🚀",
+  "your story is about to be written . . . ."
+];
+
+const container = document.querySelector(".magical-intro")
+
+function typeTextWithFade(lines, container, wordDelay = 300, lineDelay = 600) {
+  let lineIndex = 0;
+
+  function typeLine() {
+    if (lineIndex >= lines.length) return;
+
+    const p = document.createElement("p");
+    container.appendChild(p);
+
+    // Fade in line
+    requestAnimationFrame(() => {
+      p.style.opacity = 1;
+    });
+
+    const words = lines[lineIndex].split(" ");
+    let wordIndex = 0;
+
+    function typeWord() {
+      if (wordIndex < words.length) {
+        p.insertAdjacentText("beforeend", words[wordIndex] + " ");
+        wordIndex++;
+        setTimeout(typeWord, wordDelay);
+      } else {
+        lineIndex++;
+        setTimeout(typeLine, lineDelay);
+      }
+    }
+
+    typeWord();
+  }
+
+  typeLine();
+}
+
+// Wait until heading animation completes
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    typeTextWithFade(textLines, container, 300, 700);
+  }, 6000); // matches heading animation duration + small buffer
+});
+
+</script>
+ 
+
+  
+<div class="page page2 lazy-bg" data-page="2" data-bg="cnt.webp" style="background-position: center; background-size: 100% 100%;">
+ <div class="page-content">
+ <div class="in-box">
+  <!-- Unique Prologue Gate -->
+  <div class="prologue-gate" data-link="prologue.html">
+    <span class="prologue-title">Prologue: Beyond the Last Light</span>
+    <span class="prologue-sub">The Sun Fades to a Ghost...Shadows Awaken.<br> The Outer Wilds Whisper Your Name.</span>
+  </div>
+
+    <!-- Gates List (without duplicate Prologue) -->
+  <div class="gates">
+    <div class="gate" data-link="gate1.html">
+      <span class="gate-title">Gate I: The Whispering Frontier</span>
+      <span class="gate-sub">Exiles drift in the Kuiper dark.</span>
+    </div>
+
+    <div class="gate" data-link="gate2.html">
+      <span class="gate-title">Gate II: The Exiled King</span>
+      <span class="gate-sub">Pluto’s heart still beats beneath the ice..</span>
+    </div>
+
+    <div class="gate" data-link="gate3.html">
+      <span class="gate-title">Gate III: The Shadow Queen</span>
+      <span class="gate-sub">Eris rules in silence and defiance.</span>
+    </div>
+    <div class="gate" data-link="gate4.html">
+      <span class="gate-title">Gate IV: The Tumbling World</span>
+      <span class="gate-sub">Haumea spins chaos into survival.</span>
+    </div>
+    <div class="gate" data-link="gate5.html">
+      <span class="gate-title">Gate V: The Solitary Radiant</span>
+      <span class="gate-sub">Makemake glows as the ember of the void.</span>
+    </div>
+    <div class="gate" data-link="gate6.html">
+      <span class="gate-title">Gate VI: The Hidden Water World</span>
+      <span class="gate-sub">Ceres whispers oceans beneath stone.</span>
+    </div>
+    <div class="gate" data-link="gate7.html">
+      <span class="gate-title">Gate VII: The Council of Misfit Legends</span>
+      <span class="gate-sub">Five voices converge across eternity.</span>
+    </div>
+    <div class="gate" data-link="epilogue.html">
+      <span class="gate-title">Final Gate: A Promise in the Dark</span>
+      <span class="gate-sub">Your vow will carry their memory forever.</span>
+    </div>
+</div>
+
+  </div>
+  </div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+<script>
+(function () {
+  document.addEventListener('DOMContentLoaded', () => {
+    const page2 = document.querySelector('.page.page2');
+    if (!page2) return;
+
+    page2.classList.add('pb2-scope');
+
+    const prologue = page2.querySelector('.prologue-gate');
+    const gates = Array.from(page2.querySelectorAll('.gates .gate'));
+
+    function runSequence() {
+      // Reset
+      prologue.classList.remove('pb-prologue-play');
+      gates.forEach(g => g.classList.remove('pb-gate-visible'));
+      void prologue.offsetWidth; // trigger reflow
+
+      // Start prologue animation
+      prologue.classList.add('pb-prologue-play');
+
+      // Duration should match your CSS animation for title
+      const prologueDuration = 1000; // 1.5s
+
+      // After title animation, fade in gates one by one
+      setTimeout(() => {
+        gates.forEach((gate, i) => {
+          setTimeout(() => {
+            gate.classList.add('pb-gate-visible');
+          }, i * 800); // stagger: 250ms between each gate
+        });
+      }, prologueDuration);
+    }
+
+    // Start sequence once page content is visible
+    const pageContent = page2.querySelector('.page-content');
+    if (pageContent) {
+      function onTransitionEnd(e) {
+        if (e.target === pageContent && e.propertyName === 'opacity') {
+          setTimeout(runSequence, 50);
+        }
+      }
+      pageContent.addEventListener('transitionend', onTransitionEnd);
+
+      // fallback if already visible
+      if (window.getComputedStyle(pageContent).opacity === '1') {
+        setTimeout(runSequence, 50);
+      }
+    } else {
+      setTimeout(runSequence, 50);
+    }
+  });
+})();
+</script>
+
+
+
+
+<div class="page page3 lazy-bg" data-page="3" data-bg="cnt.webp" style="background-position: center; background-size: 100% 100%;">
+  <div class="page3-content">
+
+    <h1 class="page3-title">The Edge of Light</h1>
+
+      <div class="page3-intro-text">
+    <p>The Sun🌞 shrinks behind you — a pale coin flickering in the abyss.
+The inner worlds <strong>fade into MEMORY,</strong> swallowed by distance.
+But the dark is <strong>Not Empty.</strong><br>
+<span class="x">It breathes... It watches...
+It waits...</span><br>
+You have crossed into the <strong>Outer Wilds — a kingdom of shadows...</strong>
+    Where Forgotten Worlds Circle Like "Exiles"...
+Before you, the <strong>First Gate rises.</strong>
+Stone against starlight...
+<span class="x">Waiting...!!</span>
+  </div>
+
+
+<script>function runPageAnimation(pageNum) {
+  if (pageNum === 3) {
+    document.querySelector(".page3-title").style.animationPlayState = "running";
+  }
+}
+</script>
+
+<div class="planets">
+<div class="planet-block" onclick="showStory('pluto')">
+  <div class="planet-name">Pluto</div>
+
+  <div class="pluto-wrapper">
+    <div class="snow-container snow-behind"></div>
+    <div class="planet-orb pluto-orb"></div>
+    <div class="snow-container snow-front"></div>
+  </div>
+
+  <div class="planet-quote">Frozen Sentinel ❄️</div>
+</div>
+
+<script>
+  function createSnow(containerSelector, numFlakes) {
+  const container = document.querySelector(containerSelector);
+
+  for (let i = 0; i < numFlakes; i++) {
+    const flake = document.createElement("div");
+    flake.className = "snowflake";
+    flake.textContent = "❄";
+
+    // Random X position across container
+flake.style.left = Math.random() * container.offsetWidth + "px";
+
+
+    // Random size
+  const size = 3 + Math.random() * 5; // smaller flakes
+flake.style.fontSize = size + "px";
+flake.style.animationDuration = 3 + Math.random() * 3 + "s";
+flake.style.animationDelay = Math.random() * 2 + "s";
+
+
+    container.appendChild(flake);
+  }
+}
+
+// Create behind and front layers of snowflakes
+createSnow(".snow-behind", 40); // behind Pluto
+createSnow(".snow-front", 40);  // in front of Pluto
+
+</script>
+
+
+
+<div class="planet-block" onclick="showStory('eris')">
+  <div class="planet-name-eris">Eris</div>
+  <div class="eris-wrapper">
+    <div class="planet-orb eris-orb"></div>
+    <div class="particles particles-front"></div>
+    <div class="eris-fall"></div>
+    <div class="aurora"></div>
+  </div>
+  <div class="planet-info">
+    <div class="planet-quote-eris">Shadow Queen 🌒</div>
+  </div>
+</div>
+
+
+    <script>
+function createErisShards(containerSelector, numShards) {
+  const container = document.querySelector(containerSelector);
+
+  for (let i = 0; i < numShards; i++) {
+    const shard = document.createElement('div');
+    shard.classList.add('shard');
+    shard.textContent = '♦'; // diamond shape
+
+    // Random X position within Eris width
+    const containerWidth = container.offsetWidth;
+    shard.style.left = Math.random() * containerWidth + 'px';
+
+  
+    // Random size for crystal effect
+    const size = 4 + Math.random() * 6; // 4–10px
+    shard.style.fontSize = size + 'px';
+
+    // Random animation duration (fall speed)
+    shard.style.animationDuration = 3 + Math.random() * 3 + 's';
+
+    // Random animation delay for staggered effect
+    shard.style.animationDelay = Math.random() * 3 + 's';
+
+    container.appendChild(shard);
+
+    // Remove shard after it falls
+    shard.addEventListener('animationend', () => shard.remove());
+  }
+}
+
+// Generate shards continuously
+setInterval(() => createErisShards('.eris-fall', 2), 200);
+</script>
+
+<div class="planet-block" onclick="showStory('haumea')">
+  <div class="planet-name">Haumea</div>
+  <div class="haumea-system">
+    <div class="planet"><div class="ring"></div></div>
+    <div class="haumea-snow"></div>
+  </div>
+  <div class="planet-quote-haumea">Shattered Dancer 💫</div>
+</div>
+
+
+<script>// Generate snowflakes dynamically
+const snowContainer = document.querySelector(".haumea-snow");
+const numFlakes = 80; // change to 50–100 as needed
+
+for (let i = 0; i < numFlakes; i++) {
+  const flake = document.createElement("div");
+  flake.className = "flake";
+
+  // Randomize starting position inside planet width (100px)
+  flake.style.left = Math.random() * 100 + "px";
+
+  // Random size (2–6px)
+  const size = 2 + Math.random() * 4;
+  flake.style.width = size + "px";
+  flake.style.height = size + "px";
+
+  // Random speed (2–5s)
+  flake.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+  // Staggered animation
+  flake.style.animationDelay = Math.random() * 3 + "s";
+
+  snowContainer.appendChild(flake);
+}
+</script>
+
+<div class="planet-block" onclick="showStory('makemake')">
+  <div class="planet-name">Makemake</div>
+  <div class="makemake-wrapper">
+    <div class="planet-orb makemake-orb"></div>
+    <div class="makemake-particles"></div>
+  </div>
+  <div class="planet-quote">Ember in the Void 🌟</div>
+</div>
+
+
+<script>
+  function createMakemakeParticles() {
+  const container = document.querySelector('.makemake-particles');
+
+  // create dust particle
+  const dust = document.createElement('div');
+  dust.classList.add('makemake-particle');
+  dust.textContent = '•'; // small dust dot
+  dust.style.left = Math.random() * container.offsetWidth + 'px';
+  dust.style.fontSize = 6 + Math.random() * 3 + 'px';
+  dust.style.animationDuration = 2 + Math.random() * 2 + 's';
+  dust.style.animationDelay = Math.random() * 1 + 's';
+  container.appendChild(dust);
+  dust.addEventListener('animationend', () => dust.remove());
+
+  // occasional spark particle
+  if (Math.random() < 0.2) { // 20% chance
+    const spark = document.createElement('div');
+    spark.classList.add('makemake-spark');
+    spark.textContent = '✦'; // spark/star symbol
+    spark.style.left = Math.random() * container.offsetWidth + 'px';
+    spark.style.animationDuration = 3 + Math.random() * 2 + 's';
+    container.appendChild(spark);
+    spark.addEventListener('animationend', () => spark.remove());
+  }
+}
+
+// continuously generate particles
+setInterval(createMakemakeParticles, 150);
+
+</script>
+
+
+
+<div class="planet-block" onclick="showStory('ceres')">
+  <div class="planet-name">Ceres</div>
+  <div class="ceres-wrapper">
+    <div class="planet-orb ceres-orb"></div>
+    <div class="ceres-mist"></div>
+  </div>
+  <div class="planet-quote-ceres">Whispering World 🌕</div>
+</div>
+
+
+
+
+<script>
+function createCeresMist() {
+  const container = document.querySelector('.ceres-mist');
+  const particle = document.createElement('div');
+  particle.classList.add('ceres-particle');
+  particle.textContent = '•'; // ice droplet symbol
+
+  // Random horizontal position inside planet
+  particle.style.left = Math.random() * container.offsetWidth + 'px';
+
+  // Random size for natural look
+  particle.style.fontSize = 30 + Math.random() * 3 + 'px';
+
+  // Random fall duration
+  particle.style.animationDuration = 1.5 + Math.random() * 1.5 + 's';
+
+  container.appendChild(particle);
+
+  // Remove after animation to keep DOM clean
+  particle.addEventListener('animationend', () => particle.remove());
+}
+
+// Continuously generate particles
+setInterval(createCeresMist, 500);
+
+
+</script>
+
+
+<!-- Story Panel -->
+<div id="story-content" class="story-content">
+  <span class="close-btn" onclick="hideStory()">&times;</span>
+  <div id="story-text"></div>
+</div>
+
+<script>
+let currentPlanet = null;
+
+// Particle settings per planet
+const planetParticles = {
+  pluto: { symbol: "❄", size: [10, 30], color: "#b0e0e6", speed: [2,4], type: "fall" },
+  eris: { symbol: "♦", size: [10,20], color: "#cccccc", speed: [2,5], type: "fall" },
+  haumea: { symbol: "•", size: [15,35], color: "#ffffff", speed: [1.5,3], type: "fall" },
+  makemake: { symbol: ["•",], size: [15,30], color: "#ff8c00", speed: [2,4], type: "fall" , symbol: ["✦"], size: [15,20], color: "#ffd700", speed: [2,4], type: "fall" },
+  ceres: { symbol: "•", size: [25,30], color: "#ffffff", speed: [2,6], type: "rise" }
+};
+
+const stories = {
+pluto: `
+    <h2>Pluto...</h2>
+      <h3>The Frozen Sentinel ❄️</h3>
+    <p><span style="float:left; font-size:3rem; line-height:1;">P</span>luto spins slowly in the dark, its <strong>pale heart — Sputnik Planitia</strong> glowing faintly like frost under starlight. From its surface, mountains of water-ice rise jagged and tall, harder than granite beneath this weak gravity. ⛰️</p>
+    <p>Nitrogen glaciers crawl like frozen rivers, groaning as they shift. The air is so thin it clings only as a ghostly breath🧿👻. Yet beneath the shell of frost, an <strong>ocean may stir in restless dreams</strong>. 🌊</p>
+    <blockquote style="border-left:3px solid #ffd700; padding-left:15px; margin:20px 0; font-style:italic;">And then — a shimmer. Something moves across the ice.🤒🤕</blockquote>
+    <h4>🌀 Mystery in the Frost</h4>
+    <p>Was it a geyser of nitrogen erupting into the void? A shifting glacier creaking in the cold? Or a shadow that doesn’t belong?🫤 Pluto’s surface gleams like a mirror..</p>
+       <h4>🪬🧙🏻‍♂️But mirrors can hide things too.😬🪞</h4>
+  `,
+eris: `
+    <h2>Eris....</h2> <h3>The Shadow Queen 🌒</h3>
+    <p><span style="float:left; font-size:3rem; line-height:1;">F</span>arther still drifts <strong>Eris</strong>, <strong>darker, colder, prouder</strong>. Her crown is ice, her throne the outer dark. Her surface, coated in frozen methane, shines like a shard of glass catching distant fire. 🗡️</p>
+    <p>She moves to her own rhythm🍃, far beyond the planetary dance. A single orbit takes five centuries 🫠⏳. She is <strong>exile and defiance</strong>, the queen who refused to be forgotten. 🧖‍♀️👑</p>
+     <h4>💫 The Flicker in the Dark</h4>
+    <blockquote style="border-left:3px solid #ffd700; padding-left:15px; margin:20px 0; font-style:italic;">On her surface, something flickers — faint, sharp, gone in a blink.</blockquote>
+    <p>Is it Dysnomia 🔍🌛, her hidden moon😃? A comet sliding past☄️? Or a signal📡 — a spark meant to be noticed?😶‍🌫️🥴 </p>
+         <h4>🍂🐚 Eris waits. Eris watches.🌑💀</h4>
+         
+  `,
+haumea: `
+    <h2>Haumea...</h2>
+    <h3> The Shattered Dancer 💫</h3>
+    <p><span style="float:left; font-size:3rem; line-height:1;">T</span>hen comes <strong>Haumea</strong>, a world <strong>torn and remade by violence</strong>. She spins too fast for her body to be whole — stretched into an oval, broken in form.</p>
+    <p>Her icy crust glitters like fractured glass 💎, scarred by an ancient collision. Two moons whirl around her, fragments of her lost body, sparks from a blade that never stops spinning. ⚔️</p>
+    <p>To look at her is to feel unease🧟‍♀️— she is <strong>balance made unstable😈, grace made dangerous👀😫</strong>.</p>
+    <blockquote style="border-left:3px solid #ffd700; padding-left:15px; margin:20px 0; font-style:italic;">If she slows, will she break?🫣 If she breaks, what else will shatter in the silence of the Outer Wilds?🌪💥</blockquote>
+    <h4>✨ The Dancer’s Secret❤️‍🔥💃🏼</h4>
+  `,
+makemake: `
+    <h2>Makemake...</h2>
+    <h3>The Ember in the Void 🌟</h3>
+    <p><span style="float:left; font-size:3rem; line-height:1;">A</span>lone drifts <strong>Makemake</strong>, <strong>glowing faintly red</strong>. Its surface is painted with tholins — strange organic shadows born of radiation, staining the ice with the colors of rust and flame. 🔥</p>
+    <blockquote style="border-left:3px solid #ffd700; padding-left:15px; margin:20px 0; font-style:italic;">Sometimes, a veil of atmosphere stirs around it, then vanishes, as though the world is holding its breath.</blockquote>
+    <p>Makemake is the <strong>solitary flame glowing against the endless dark</strong>.</p>
+    <h4> 🐦‍🔥⚡️The Breathing Flame🔥💥</h4>
+  `,
+ceres: `
+    <h2>Ceres...</h2>
+    <h3>The Whispering World 🌕</h3>
+    <p><span style="float:left; font-size:3rem; line-height:1;">C</span>loser in, where asteroids scatter like broken bones, waits <strong>Ceres</strong>. At first glance, she is <strong>pale and unassuming</strong>. But look deeper, and <strong>secrets spill forth</strong>.</p>
+    <p>Beneath her crust lies briny water🫧🪐. On her face, salt-crystals gleam like lanterns🏮, lighting the rock with ghostly fire♨️. They are whispers — <strong>signs that she has not gone silent, not yet</strong>.</p>
+    <blockquote style="border-left:3px solid #ffd700; padding-left:15px; margin:20px 0; font-style:italic;">Could life once have stirred in her hidden ocean?🌊😯<br> Could it still?🫨🥲</blockquote>
+    <h4>🍃The Whisper Beneath🫧🌖</h4>
+  `
+};
+
+// Show story popup
+function showStory(planet) {
+  currentPlanet = planet;
+  const panel = document.getElementById("story-content");
+  const storyText = document.getElementById("story-text");
+
+  panel.style.display = "block"; // must be first
+  storyText.innerHTML = stories[planet];
+
+  addParticles(panel, planet);
+}
+
+// Hide story popup
+function hideStory() {
+  const panel = document.getElementById("story-content");
+  panel.style.display = "none";
+  panel.querySelectorAll(".story-effects").forEach(e => e.remove());
+}
+
+// Particle generator
+function addParticles(container, planet) {
+  container.querySelectorAll(".story-effects").forEach(e => e.remove());
+  const effect = document.createElement("div");
+  effect.classList.add("story-effects");
+  container.appendChild(effect);
+
+  const width = container.offsetWidth;
+  const settings = planetParticles[planet];
+
+  const interval = setInterval(() => {
+    if(container.style.display === "none") { clearInterval(interval); return; }
+
+    const p = document.createElement("div");
+    p.classList.add("particle");
+
+    // Random symbol
+    if(Array.isArray(settings.symbol)) {
+      p.textContent = Math.random() < 0.2 ? settings.symbol[1] : settings.symbol[0];
+    } else {
+      p.textContent = settings.symbol;
+    }
+
+    p.style.left = Math.random() * width + "px";
+
+    // Random size
+    const [minSize,maxSize] = settings.size;
+    p.style.fontSize = (minSize + Math.random()*(maxSize-minSize)) + "px";
+
+    // Random speed
+    const [minSpeed,maxSpeed] = settings.speed;
+    p.style.animationDuration = (minSpeed + Math.random()*(maxSpeed-minSpeed)) + "s";
+
+    p.style.color = settings.color;
+    p.style.animationName = settings.type === "rise" ? "storyParticleRise" : "storyParticleFall";
+
+    effect.appendChild(p);
+
+    p.addEventListener("animationend", () => p.remove());
+  }, 200);
+}
+</script>
+
+</div>
+
+  </div>
+ <!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page4 lazy-bg" data-page="4" data-bg="strt.png" style="background-position: center; background-size: 100% 100%;">  
+  <div class="page-content">
+<!-- Chapter One Text -->
+<div class="chapter-one">
+   <div class="magic-box1">
+  <h2>The Gates of Silence</h2>
+
+  <p> <span class="dropcap">T</span>he night stretched endlessly across the horizon, its silence broken <span class="s">only by the Whisper of Faint Distant Stars.</s> <P>
+ <P> You stepped forward...<strong>boots sinking into the frost</strong>, as though the <strong>ground itself resists your passage.</strong></p>
+
+  <p>Far ahead, an <strong>Arch of stone</strong> stood against the sky, carved <span class="s">NOT</span> by human hands but by <span class="s">something Older</span> — something Watching🫨.</p>
+
+  <p><strong>A voice seems to breathe through the void:</strong></p>
+<span class="a">  “Beyond the Gates, All Stories Begin Anew...🪸”</span>
+
+  <p>You reached out, </p>
+   <P> heart racing, as the shadows stirred.....
+    <P> You reach forward and.. <br>
+      <h3>The adventure is about to BEGIN...</h3></p>
+  </div>
+
+</div>
+</div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+
+
+
+</div>
+
+
+<div class="page page5 lazy-bg" data-page="5" data-bg="shadw.webp" style="background-position: center; background-size: 100% 100%;">
+
+  <div class="page-content">
+<div class="chapter-one">
+   <div class="magic-box1">
+  <h2>The Shadow That Watches 🔎👁️</h2>
+  <p>
+    <span class="dropcap">Y</span>ou return to Pluto’s horizon. The silence is sharp, cutting like glass.. The mountains glisten like teeth in the starlight.
+  </p>
+  <p>
+   <strong> And then,movement.. </strong><br>
+    A shadow slides across the frost. <br>
+    Silent. Swift. Wrong.<br>
+    It is gone.
+  </p>
+  <p>
+    Your breath stills. <br>
+    The void feels aware. <br>
+   <strong> Something has noticed you..👁️</strong>
+  </p>
+  <p>
+    The silence is alive. <br>
+    The dark is begins to speak. <br>
+    And the forgotten worlds....<br>
+    <strong> Are Listening.</strong>
+  </p>
+  <hr>
+  <p class="ending">
+    <em>The curtain has lifted. The journey has begun. What lies in the ice, in the whispers, in the flickers of distant shadows — will find YOU..🚀</em>
+  </p>
+  </div>
+
+  <p class="chapter-end">⋆｡ ﾟ ☁︎｡ ⋆｡⋆𓆩༺✧༻𓆪 ﾟ ☾ ﾟ ｡⋆</p>
+</div>
+
+</div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+
+
+
+</div>
+
+
+
+<div class="page page6 lazy-bg" data-page="6" data-bg="shadw.webp" style="background-position: center; background-size: 100% 100%;">   
+  <div class="page-content">
+      <div class="chapter2">
+  <div class="magic-box1">
+    <h1 class="magic-title">Gate 1: The Whispering Frontier </h1>
+    <h2 class="magic-subtitle">Part I — Entering the Borderlands ✨</h2>
+
+    <p><span class="dropcap">T</span>he darkness shifts. <span class="cosmic">Not silence anymore—something moves here🌑.</span> The void breathes, cold and subtle, whispering secrets that tickle the edge of your senses.</p>
+    <p>
+Faint trails of starlight drift through the black, like cosmic ghosts ✨. Tiny shards of ice and rock float past you, glittering against the void like scattered gems 💎.<strong>They are not debris..</strong> They are <span class="cosmic">memories—fragments</span> from the Birth of the Solar System 🕰️💫.</p>
+
+    <p>Behind you, the Sun 🌞 is a pale lantern 🔭, smaller than a coin, flickering weakly across endless black. <span class="special">Its warmth is gone..</span></p>
+     <p> <strong> A rumor from a Distant World</strong>... </p>
+
+<p>  Out here, Temperatures plunge to <span class="special">-220°C </span>🥶❄️.
+   A place where<br> <span class="special">Breath freezes instantly and Shadows themselves seem Solid.</span><br>
+  <span class="cosmic">Where Even Silence Has A Weight....</span></p>
+   
+  </div>
+</div>
+</div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page7 chapter2 lazy-bg" data-page="7" data-bg="shadw.webp" style="background-position: center; background-size: 100% 100%;">
+
+  <div class="page-content">
+      <div class="chapter2">
+  <div class="magic-box1">
+    
+    <p><strong>Then… </strong> emptiness begins to shimmer. Tiny sparkles drift like frost-kissed fireflies, flickering in the eternal dark.❄️✨.</p>
+    <p> You have crossed into the <span class="cosmic">Kuiper Belt</span> 🌌—a colossal ring of icy worlds, <strong>stretching thirty to fifty</strong> farther from the Sun than Earth, filled with trillions of ancient bodies,
+frozen remnants left behind at the dawn of creation.❄️</p>
+<p> A wilderness frozen in time, alive with secrets.. 🪨 </p>
+
+    <p>
+The Kuiper Belt is both <strong>Prison ⛓️ and Sanctuary 🌟</strong>. Each icy shard carries a memory: frozen water 💧, methane ❄️, traces of ammonia and organics—the building blocks of life. These fragments are <span class="special">time capsules</span> unchanged for 4.5 billion years 🕰️✨.</p>
+
+<div class="bb">
+<p> <span class="cosmic">Touch one, and you are holding 4.5-Billion - Year-Old History 😱⚡️ In Your Hands 🕰️✨...</span></p>
+</div>
+
+    <p class="hook">Whispers of creation.
+Stone poems of the first light.
+And in their silence… something listens back.</p>
+  </div>
+</div>
+</div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page8 chapter2 lazy-bg" data-page="8" data-bg="shadw.webp" style="background-position: center; background-size: 100% 100%;">
+    <div class="page-content">
+  <div class="magic-box1">
+    <h2 class="magic-subtitle">Part II — Shapes in the Shadows 🌑👁️</h2>
+
+    <p><span class="dropcap">Y</span>our eyes adjust.. Shapes move among the drifting ice🌕. Not boulders, not comets. But  <span class="cosmic"> Worlds.</span> Small, yes—but round, scarred, alive💫. One drifts closer—a shadow wrapped in frost, shimmering faintly🌕. It is neither planet nor asteroid. Something in between. Something the <strong>universe hesitates to name...</strong></p>
+    <p>And then it whispers: </p>
+      <p>✨ <span class="cosmic">Dwarf planet</span> ✨</p>
+
+     <p> Here, “dwarf” does not mean lesser. It means <span class="cosmic">Hidden.. Secret.. Legendary 🌑👑..</span>
+Among these frozen wanderers, <span class="special">Five hold the Crown of Mystery.</span> Each carries scars of cosmic history, each keeps secrets the giants of the inner Solar System cannot tell.
+ They are not rulers — <strong>they are poets of creation 💫🌌.</strong></p>
+<p>
+They do not speak.
+<strong>They only watch.</strong><br>
+And in their watching, you feel the weight of judgment.<br>
+Here, in the Silence, <span class="special">You are the intruder....</span></p>
+
+    
+  
+  </div>
+  </div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page9 chapter2 lazy-bg" data-page="9" data-bg="shadw.webp" style="background-position: center; background-size: 100% 100%;">  
+  <div class="page-content">
+  <div class="magic-box1">
+    <p>One of them turns toward you…🌑👁️</p>
+    <h3>The Frozen Heart Emerges ❄️🌕</h3>
+
+    <p>And then you see it.<br>
+      A pale glimmer.... 
+      A <strong>Frozen Heart</strong>..... <br>
+      <span class="cosmic">A world that once dared to be a "PLANET".🌕</span></p>
+
+    <p>Jagged mountains rise like the teeth of forgotten beasts🏔️. Nitrogen frost sparkles across plains stretching endlessly.
+       Valleys hide secrets beneath ice, hinting at a possible underground ocean 🌊❄️.</p>
+
+    <p><strong>The first voice of the frontier. The dreamer who refused to be forgotten.</strong></p>
+    <h2>Pluto❄️🌕</h2>
+    <p><strong>The story begins...</strong></p>
+
+    <p class="hook">It's only the beginning… four more voices wait in the shadows.</p>
+  </div>
+  </div>
+<!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page10 lazy-bg" data-page="10" data-bg="pluu.webp" style="background-position: center; background-size: 100% 100%;">
+  <div class="page-content1">
+  <span class="story-titlep">GATE 2 </span>
+    <span class="story-subtitlep">Pluto – The Exiled King</span>
+
+    </div>
+    <!-- Back Button (top-left) -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page11 lazy-bg" data-page="11" data-bg="plutoboy.jpg" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+  <div class="chapter-content">
+    <div class="magic-box2">
+    <!-- Chapter Title -->
+     <span class="head1">Pluto 
+      The Exiled King</span>
+   
+    <!-- Story Text -->
+    <p class="story">
+      <span class="dropcap">Y</span>our legs refuse to move... The ice beneath you seems to grip you with intent, Warning you: <strong>this world does not forgive lightly.</strong> And then, through the shadows, a pale glow emerges.</p>
+    <p><span class="special1"> Pluto 🌕</span>
+    </p>
+
+    <p class="story">
+      A name you’ve known for decades. <strong>Once the ninth planet,</strong> the pride of the outer Solar System. <span class="special">Now - An exile.. Forgotten.. Cast aside…❄️👁️</span>
+      You should feel comforted😮‍💨. But Pluto <strong>does not</strong> welcome recognition lightly. Its icy plains shimmer faintly, jagged mountains rise like the spines of ancient beasts, and every crevice seems to <strong>judge your presence.</strong>
+      The exiled king remembers every slight, every whisper of betrayal.
+    </p>
+
+    <p class="story">
+      You take a careful step👣. The nitrogen frost crunches underfoot.. <strong>Tombaugh Regio</strong> glows ahead — the <span class="special">Heart...💖</span><strong>Sputnik Planitia </strong> stretches wide, pale and smooth, yet alive. Polygonal ice patterns ripple slowly, almost like Pluto itself is breathing beneath the frost.
+    </p>
+
+    <p class="story highlight">
+      Could there be an ocean hidden below....<br>
+      liquid and secret, keeping the planet’s memories alive for
+       <span class="special">billions of years?????✨</span>
+    </p>
+  </div>
+</div>
+  </div>
+  <!-- Next Button -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page12 lazy-bg" data-page="12" data-bg="plutoboy.jpg" style="background-position: center; background-size: 100% 100%;">
+   
+  <div class="page-content">
+
+  <div class="chapter-content">
+    <div class="magic-box2">
+    <!-- Story Text -->
+    <p class="story">
+      Across the horizon, the dark red of <span class="highlight">Cthulhu Macula</span> stretches like a Scar⚡️. Ancient, haunting—a reminder that <strong>Pluto has survived collisions, betrayals, and the abandonment of the inner planets.</strong> The contrast between light and dark is not just visual—it is emotional. Pluto wears its exile openly, a mixture of beauty and bitterness, pride and sorrow🥺💔.
+    </p>
+
+    <p class="story">
+      Above you, a whisper-thin atmosphere shimmers. Nitrogen, with traces of methane and CO, forms pink and blue hazes as the tiny Sun 🌞 struggles to warm the surface. The world exhales and inhales with its orbit, expanding and collapsing, centuries of breath stretching across the Kuiper Belt.
+    </p>
+
+    <p class="story">
+     <strong> And then… movement.</strong> Subtle but deliberate. <span class="highlight">Charon</span> 🌕, massive and grave, mirrors Pluto’s gaze—a sentinel in the void. <strong>Styx, Nix, Kerberos, and Hydra</strong>🪐 drift in silent orbits, companions of the exiled king, witnesses to its sorrow, guardians of its secrets.
+    </p>
+
+    <p class="story">
+     You remember its orbit 🚀. Eccentric, wandering across Neptune’s path, <strong>248 Earth years for a single lap around the Sun.</strong> Tilted, extreme, isolated. <strong>Each season lasts decades😦,</strong> alternating light and darkness. You begin to understand why Pluto holds grudges: it has felt rejection not just from the Sun,  <span class="special">but from the worlds it once called <strong>"Siblings"</strong> 💔.</span>
+    </p>
+</div>
+
+  </div>
+  </div>
+
+  <!-- Next Button -->
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page13 lazy-bg" data-page="13" data-bg="plutoboy.jpg" style="background-position: center; background-size: 100% 100%;">
+  <div class="page-content">
+  <div class="chapter-content">
+      <div class="magic-box2">
+    <!-- Story Text -->
+    <p class="story">
+      A shiver runs through your spine as shadows lengthen. Every ridge, every crevice, every polygon of ice seems to watch you, assessing whether you come as a friend—or another betrayer ❄️👁️.
+      <br><strong>Then, a voice—soft, ancient, alive:</strong> </p>
+
+      <p><span class="special1">"Why have you come… after all these centuries?"</span> <br></p>
+      <p>Pluto seems to ask, a shadow flickering across the plains 🌑. </p>
+      <span class="special1"> "Do you know what it feels like… to watch the worlds you loved call you less? To be erased from memory?"</span>
+    </p>
+
+    <p class="story">
+      You try to respond, but the cold steals your words. Pluto’s icy plains shimmer faintly, alive with emotion✨...
+    </p>
+
+ <p><span class="special1">
+      "I have watched my siblings dance in the Sun’s warmth… while I wandered, exiled, through darkness😓. <br>Tell me… why should I trust you?"</span>
+    </p>
+    <p class="story">
+      You step closer, heart pounding. The Heart of Pluto pulses under your gaze... The exiled king <strong>does not demand friendship—only recognition, only understanding.🙁</strong>And then, almost imperceptibly, the tension eases. A shimmer of acknowledgment spreads across the icy plains. Not warmth. Not forgiveness. <br><strong>Just a silent, measured acceptance...✨</strong>
+    </p>
+  
+</div>
+
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+<div class="page page14 lazy-bg" data-page="14" data-bg="plutoboy.jpg" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+  <div class="chapter-content">
+    <div class="magic-box2">
+      
+
+
+        <p class="story highlight">
+      Pluto’s final message drifts into your mind: </p>
+      <p><span class="special1">"Remember me, little traveler...<br> Remember that even exiles have stories… even forgotten worlds have hearts...Tell them of me… and do not let me vanish into silence." ✨</span>
+    </p>
+    <p class="story">
+  <strong>A tear slides down your cheek...</strong><br>
+   You know your journey is far from over, but you cannot linger.
+   The Sun is distant.  <strong>Space-time awaits.</strong>  You look once more at the icy kingdom, the mountains, the Heart, and the moons circling silently🥺. </p>
+   <span class="highlight1">Pluto...... the exiled king, watches you leave, its sorrow and hope entwined in the frozen light👋🏼..</span>
+
+<p class="story">
+  Hovering above Sputnik Planitia, you feel the pulse of this distant planet—the weight of billions of years, the ache of betrayal, and the quiet pride of survival. 
+<span class="special1"> Pluto is more than a dwarf planet.</span> </p>
+
+<p><strong>It is alive, mysterious, haunted, and unforgettable 🌕✨...</strong>
+</p>
+
+<p class="story highlight">
+  The frontier is alive. <br>
+  And your story has only just begun...
+</p>
+
+
+<!-- Magic Letter Icon -->
+<div class="magic-letter-icon" onclick="openMessageBox()">
+  <img src="box 1.png" alt="Magic Letter" class="letter-image">
+</div>
+
+<!-- Hidden Message Box -->
+<div class="message-box" id="magicMessageBox">
+
+  <!-- Greeting -->
+  <p class="speciall">✍🏻 Dear Traveler👩🏽‍🚀😃,</p>
+
+  <!-- Message -->
+  <p class="msg">"Before you step away from the frozen plains, you speak… One last word, a promise carried across the void...🤗🫶”</p>
+
+<div class="final-message-box">
+  <form id="plutoMessageForm" onsubmit="pluto_submitMessage(event)">
+    <textarea name="message" class="user-msg" placeholder="Write your message here..." required></textarea>
+    <button type="submit" class="send-btn1">Send</button>
+  </form>
+</div>
+
+</div>
+
+
+
+
+<script>// Open the message box
+function openMessageBox() {
+  document.getElementById('magicMessageBox').classList.add('open');
+}
+
+function pluto_submitMessage(e) {
+  e.preventDefault();
+
+  let textarea = document.querySelector("#plutoMessageForm .user-msg");
+  let message = textarea.value.trim();
+
+  if (message === "") {
+    alert("Please write a message first 💌");
+    return;
+  }
+
+  // --- Show Upload/Waiting GIF ---
+  let upload = document.createElement("div");
+  upload.className = "upload-popup";
+  upload.innerHTML = `<img src="wait.gif" alt="Uploading..." class="status-gif">`;
+  document.body.appendChild(upload);
+
+  // Send via EmailJS
+  emailjs.sendForm("service_6vksf2k", "template_tek5tgq", "#plutoMessageForm")
+    .then(function(response) {
+      // Remove upload GIF
+      upload.remove();
+
+      // --- Success GIF Popup ---
+      let success = document.createElement("div");
+      success.className = "success-popup";
+      success.innerHTML = `<img src="success.gif" alt="Success" class="status-gif">`;
+      document.body.appendChild(success);
+
+      // Remove after 2.5s
+      setTimeout(() => { success.remove(); }, 2500);
+
+      // Reset form
+      textarea.value = "";
+    }, function(error) {
+      upload.remove();
+      alert("❌ Failed to send message. Check Your Connection and Please try again!");
+      console.error("EmailJS error:", error);
+    });
+}
+</script>
+
+
+</div>
+
+    </div>
+    </div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+  </div>
+
+
+
+
+
+<div class="page page15 lazy-bg" data-page="15" data-bg="erisdys.jpg" style="background-position: center; background-size: 100% 100%;">
+  <div class="page-content1">
+  <span class="story-titlee">GATE 3 </span>
+    <span class="story-subtitlee">Eris – The Shadow Queen 👑</span>
+</div>
+   <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page16 lazy-bg" data-page="16" data-bg="erisboy.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+ <div class="magic-box3">
+      <span class="head2">🌌Eris
+        The Shadow Queen 🌌</span>
+
+    <p><span class="dropcap">T</span>he cold follows you like a <strong>living thing</strong> ❄️👁️. You leave Pluto’s icy plains behind, but the Heart, the mountains, the <strong>moons—all of it—linger in your memory,</strong> a sorrowful echo of a world betrayed and remembered 🌕.</p>
+    <p>You drift further into the Kuiper Belt. <strong>The darkness deepens,</strong> stretching into a void <strong>older and colder</strong> than your mind can't imagine.. Shadows twist among drifting ice and rock🪨, remnants of worlds that <strong>never found a Home.</strong> <br>
+   <span class="highlight"> Every shard glints like a memory, frozen in time 🕰️.</span></p>
+    <p>And then…<br> A glimmer, faint at first, almost swallowed by the void. A queen emerges from the darkness, smaller than Pluto but radiating an icy, indomitable presence. </p>
+      <p><span class="special3">Eris 🌒💫</span></p>
+    <p><strong>Your breath catches...</strong></p>
+    <p> The distance alone makes her <span class="highlight">untouchable—67 times farther from </span> Sun than Earth... The faint light of the distant Sun 🌞 barely warms her surface, and yet she glows with a cold, defiant majesty.</p>
+   
+    </div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page17 lazy-bg" data-page="17" data-bg="erisboy.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+
+  <div class="chapter-content">
+ <div class="magic-box3">
+   <p>She drifts alone, a dwarf planet exiled even beyond Pluto’s reach. Her orbit is wild and eccentric 🚀, taking <strong>557 Earth years to circle the Sun🫠</strong> swinging far beyond Neptune’s domain, a lonely sentinel of the outer darkness.</p>
+
+    <p class="story">
+      Eris does not move like Pluto, deliberate and measured</span>. <strong>She spins slowly</strong>, aloof, almost <span class="italic shimmer">teasing the universe</span>, daring anyone to approach.</p>
+      <p>
+      Her surface is a frost of methane ice ❄️💎, <span class="highlight">pale whites and shimmering blues</span>, with hints of mysterious red dust scattered across some craters ❄️.
+      Every ridge, every depression, carries the story of <strong>billions of years🕰️...</strong>
+    </p>
+
+    <p class="story">
+      And then you sense her companion: <span class="special1"> ❄️ Dysnomia 🌑</span>, her small moon, orbiting silently, faithful and unblinking.
+      Styx, Nix, Kerberos, and Hydra are Pluto’s family—But....</p>
+
+      <p>Eris <strong>walks alone</strong> save for Dysnomia, a shadow following the queen.
+    </p>
+
+    <p class="story">
+      <strong>A presence. Not a voice, but awareness.👁</strong><br>
+      Eris watches you.. Her shadow stretches across the icy plains, swallowing your light, <strong>testing your courage..🔥</strong>.
+    </p>
+      <p><span class="special">
+      "Why do you follow me… to the edge of the Solar System?"</span></p>
+
+  </div>
+    </div>
+</div>
+     <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+
+  </div>
+
+
+
+<div class="page page18 lazy-bg" data-page="18" data-bg="erisboy.webp" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content">
+    <div class="chapter-content">
+      <div class="magic-box3">
+  
+
+     <p>Her silence whispers, <span class="italic">ancient and sharp</span>.</p>
+     <p> <span class="special">"Do you seek knowledge… or do you merely tremble before what you cannot control?"</span>
+    </p>
+
+    <p class="story">
+      You realize she is not asking, but <strong>Challenging</strong>.<br>
+      This is not a world to be tamed. This is a world to be <span class="italic">witnessed, respected, feared</span> ❄️👁️.
+    </p>
+
+    <p class="story">
+      You drift closer, careful, mesmerized by her frozen beauty.<br>
+      The surface glints faintly with ice and frost, and you imagine the mysterious heat below, <span class="highlighting">a secret core</span> perhaps, hiding stories of formation and survival 🌊✨.
+    </p>
+
+ <p class="story">
+Eris’s orbit carries her <strong>farther</strong> than any of her siblings, yet she <strong>remains a mirror of Pluto’s defiance</strong>.  <span class="special1"> Alone, distant, yet Alive...</span> The Kuiper Belt is her kingdom—a frontier where <strong>time moves differently</strong>, where isolation is power🔱, and secrecy is survival✨.
+</p>
+<p>
+You step nearer, and for a fleeting heartbeat...The Queen of Shadows seems to acknowledge you, a silent nod across billions of kilometers💫. </p>
+<p><strong>Not friendship, not warmth—just recognition.</strong> <br>
+A fleeting trust, <strong>hard-won</strong> and ephemeral🔆...
+    </p>
+</div>
+</div>
+</div>
+   <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page19 lazy-bg" data-page="19" data-bg="erisboy.webp" style="background-position: center; background-size: 100% 100%;"> 
+  <div class="page-content">
+    <div class="chapter-content">
+      <div class="magic-box3">
+  <span class="head2"> Eris Farewell & The Kuiper Belt 🌌</span>
+
+    <p>
+      <span class="special">"Remember me",</span></p>
+      <p>
+      her presence seems to murmur across the void.</p>
+      <p>
+      <span class="special">"Not for what I am called… But for what I endure..."</span>
+    </p>
+
+    <p>
+      You leave with a shiver😬, carrying   <span class="special1">Eris’s story in your Heart..</span><br>
+      Another exile, another mystery of the Kuiper Belt, reminding you that the outer reaches of the Solar System are <strong> Alive, Secretive, and profoundly Emotional</strong> 🌌.
+    </p>
+
+    <p>
+      The Kuiper Belt stretches on, darker still.</p>
+      <p>You drift on.....<br> Knowing <span class="highlight shimmer">Pluto and Eris are just the beginning</span>...
+        Three ancient wanderers await, each a world of ice, fire, and hidden histories......🤕</p>
+
+        <p><strong>Each with a story the inner planets cannot tell....🍂</strong></p>
+
+  
+</div>
+    </div>
+    </div>
+
+     <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+
+</div>
+
+
+<div class="page page20 lazy-bg" data-page="20" data-bg="haumea.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content1">
+  <span class="story-titleh">GATE 4 </span>
+    <span class="story-subtitleh">Haumea The Tumbling World⚡️</span>
+ </div>
+   <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page21 lazy-bg" data-page="21" data-bg="haumea.webp" style="background-position: center; background-size: 100% 100%;">
+
+  <div class="page-content">
+  <div class="chapter-content">
+ <div class="magic-box4">
+    <span class="head2">Haumea-The Tumbling World⚡️ </span>
+
+    <p>
+      <span class="dropcap">Y</span>ou thought you could leave..
+      <strong>Pluto</strong>’s sorrow still lingers in your heart...
+     <strong> Eris</strong>’s cold gaze haunts your thoughts 🌒....
+      You drift through the Kuiper Belt, <strong>expecting Emptiness...</strong>But another legend awaits....And almost instantly, <strong>you realize—you are not free to move on yet</strong>.
+      A glint, sharp and impossible, spins into view.
+    </p>
+
+    <p>
+      
+      <span class="special3">Haumea 💫🌀</span>
+    </p>
+
+    <p>
+      Your chest tightens. Its shape is…😱 <strong>Wrong...Not round...</strong> Not forgiving.
+      <strong>A fast-spinning, elongated ellipsoid🏉, racing through space like a celestial blade🪚.</strong>
+     <strong> One rotation</strong> takes just <span class="highlight">4 hours 😵‍💫⏱️</span>, so fast that the poles flatten and the equator bulges outward—a world shaped by chaos itself.</p>
+
+      <p>Its orbit swings wildly, from <span class="highlight">38 to 51 AU from the Sun </span>, drifting along the outer edges of the Kuiper Belt like <strong>a rebel with NO master.</strong>
+      Centuries stretch like frozen breaths as it swings through darkness, extreme seasons dancing across icy plains ❄️🥶.
+    </p>
+</div>
+   
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+  </div>
+
+
+
+<div class="page page22 lazy-bg" data-page="22" data-bg="haumea.webp" style="background-position: center; background-size: 100% 100%;">    
+  <div class="page-content">
+  <div class="chapter-content">
+ <div class="magic-box4">
+     <p>
+      Crystalline ice <span class="highlight">❄️💎</span> glitters across the surface, catching the distant Sun 🌞 in dazzling flashes.
+      Tiny shards drift off, sparks from an invisible forge, twirling across the void.
+      You <strong>feel dizzy🫨🫨</strong> just looking at it, as if <span class="highlight">space itself is bending in response.
+    </p>
+
+    <p>
+      <strong>Billions of years ago,</strong> a violent collision spun this world into its current chaotic form💥.
+      Fragments were flung outward, some forming moons—<span class="highlight">Hi‘iaka and Namaka🌙🪐</span> — others left adrift as wandering icy shards❄️.
+      Every ridge, every frozen crack tells the story of survival against the cosmic storm.
+    </p>
+
+    <p>
+      You try to move closer, but your body hesitates.<br>
+      Haumea’s frenetic spin seems to tug at your senses, pulling you into its rhythm 🌌.
+      <strong>You are trapped💥,</strong> caught in the pull of this tumbling world, mesmerized by motion and beauty.
+    </p>
+
+    <p>
+     <strong> Then, a thought drifts across your mind..</strong>
+    </p>
+
+    <p>
+  <span class="special1"> "Do you understand… </span></p>
+   <p>
+  <span class="special1"> What it takes to Survive When the Universe Spins You Faster than Your Own Gravity Can Hold?"</span>
+    </p>
+
+</div>
+    </div>
+    </div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page23 lazy-bg" data-page="23" data-bg="haumea.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box4">
+
+  
+    <p>
+      The words echo in your chest. Crystalline plains glimmer like frozen mirrors, reflecting the infinite void.
+      Shadows stretch and vanish, light twists in impossible curves, and for a moment, you feel dizzy with awe🫨.
+    </p>
+
+    <p>
+      And then, another question drifts silently, carried on the spinning winds:</p>
+      <p>
+    <span class="special1"> 
+      "Do you see me?"<br>
+      "Do you honor my struggle… or do you merely watch?"</span>
+    </p>
+    <p>
+      You shiver, your pulse syncing, for a heartbeat, with <span class="highlight">Haumea’s furious rotation🧶</span>.
+      You realize<strong> you are part of this story now,</strong> a witness to a world that dances on the edge of danger and beauty.
+      The moons twirl, shards glitter, and the<strong> tumbling ellipsoid teaches a lesson older than Earth itself:</strong><br>
+      <span class="highlight">Chaos can be Alive, and Survival is an ART📿...</span>
+    </p>
+
+    <p>
+      Finally, you step back, reluctantly breaking the hypnotic hold😮‍💨.
+      Your chest heaves, your mind still reels. Haumea spins on, a world of motion, mystery, and frozen beauty, leaving a mark on your soul you know will never fade <span class="emoji">💭</span>.
+    
+      Far ahead, in the shadowed distance, a quieter, more radiant glow beckons.</p>
+      <p>
+      <span class="highlight">Makemake</span> waits, solitary, enigmatic, ready to reveal its own secrets🪄.
+    </p>
+
+    <p>
+      <strong>The journey continues…</strong><br>
+      </p>
+   
+    
+</div>
+</div>
+</div>
+   <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page24 lazy-bg" data-page="24" data-bg="makemake.jpg" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content1">
+  <span class="story-titlem">GATE 5 </span>
+    <span class="story-subtitlem">Makemake – The Solitary Radiant🧿</span>
+ </div>
+
+     <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+<div class="page page25 lazy-bg" data-page="25" data-bg="makemake.jpg" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content">
+       <div class="magic-box5">
+   <span class="head2">Makemake <br>
+    The Solitary Radiant🧿 </span>
+
+    <p>
+      You stagger back, your legs trembling under the lingering pull of  <span class="highlight">Haumea’s furious spin</span>.
+      Nausea twists through you, your stomach churning as if the universe itself has turned you inside out 🤢.
+    <strong>  You try to escape,</strong> to pull yourself away from the hypnotic spin, but your body refuses to obey.
+      Every step feels heavier, every breath thinner.</p>
+      <p>
+     <strong> The echoes of Haumea’s silent questions still ring in your mind..</strong>
+    </p>
+    <p>
+<span class="special2"> 
+      "Do you see me? Do you honor my struggle… or do you merely watch?"</span>
+    </p>
+
+    <p>
+      <strong>Your heart pounds....💓</strong>
+      You realize that witnessing <strong>Haumea was not enough</strong>—you had to feel it, understand it, respect it.
+      Only then could you survive this strange frontier of wandering worlds.
+    </p>
+
+    <p>
+      And then… a glimmer in the distance 🌟.<br>
+      A faint gradient of light, soft yet impossible in its beauty. <span class="highlight"> Something calmer than Haumea,</span> yet alive with its own secrets.
+      You squint, trying to focus through your spinning vision, nausea, and racing thoughts..
+    </p>
+
+    <p>
+      <span class="special">Makemake 🌟</span>
+    </p>
+</div>
+    </div>
+     <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+
+<div class="page page26 lazy-bg" data-page="26" data-bg="makemake.jpg" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box5">
+
+ <p>
+      Its light is quieter, more solemn, <strong>almost Welcoming💫.</strong></p>
+      <p>
+      At first...it seems small, faint, almost shy—but the closer you drift, the more its presence grows, <span class="highlight">like a solitary lighthouse in the endless black</span>.
+      The dwarf planet radiates quiet confidence, standing alone in its orbit <strong>45–53 AU</strong> from the Sun 🚀, weaving slightly eccentrically through the Kuiper Belt like a watchful sentinel 🌌❄️.
+    </p>
+
+    <p>A thought drifts through your mind, lingering from Haumea’s challenge:</p>
+<p>
+   <span class="special2"> 
+      "If Haumea is the chaos that tests your courage, I am the solitude that asks you to reflect."</span>
+    </p>
+
+    <p>
+      Makemake is the embodiment of that solitude.
+      Its pale, reddish surface, coated in frozen methane ❄️, glimmers faintly under the distant Sun 🌞.
+      Tiny craters pockmark its icy plains, evidence of ancient cosmic collisions 💥🪨.
+     <strong> Unlike Haumea,</strong> it does not spin frantically—its rotation is measured, deliberate, a quiet rhythm that invites reflection rather than fear.
+    </p>
+
+    <p>
+      You hover above the dwarf planet, feeling an almost spiritual resonance with its lonely existence 🌟💫.
+      For billions of years, it has drifted in isolation, silent yet proud, holding secrets of volatile ices, frozen methane, and ethane trapped in its crust ❄️🧊.
+     </p>
+</div>
+ 
+    </div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+
+<div class="page page27 lazy-bg" data-page="27" data-bg="makemake.jpg" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box5">
+
+   <p>
+Scientists on Earth call it distant and remote—but here, in your presence, it is <span class="highlight">alive, dignified, and enigmatic❤️‍🔥</span>.
+     </p>
+
+<p>
+  A pulse of quiet thought drifts through your mind:
+    </p>
+     <p>
+      <span class="special2"> 
+      <strong>"I am alone… yet I endure. I shine, even when no one watches.."</strong></span>
+    </p>
+  
+    <p>
+      Your chest swells with emotion, tears welling despite the frozen chill surrounding you ❄️💧.
+      You feel the solitude, the beauty, the quiet defiance of this world.
+      The dwarf planet does not ask for recognition, yet demands presence, understanding, respect🪐🍀.
+    </p>
+
+    <p>
+      Makemake’s <strong>orbit is slow,</strong> deliberate, <strong>taking Centuries to circle the Sun, seasons Lasting Decades</strong>❄️.<br>
+      Its surface glows faintly in orange-red hues, <strong>a living diary of radiation,</strong> ice chemistry, and ancient impacts.
+      There are <span class="special1">no known large moons</span> its solitude does not feel empty; it feels complete, a world content in its own existence 🌟🪐.
+    </p>
+
+    <p>
+      You try to speak, to leave a mark, a thought, a whisper—but <span class="special1">words feel small.</span> <strong>Instead... let your presence, your awe, your reverence reach the dwarf planet.💫🍀</strong></p>
+
+  
+    </div>
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+
+
+<div class="page page28 lazy-bg" data-page="28" data-bg="makemake.jpg" style="background-position: center; background-size: 100% 100%;">
+  
+  <div class="page-content">
+ <div class="chapter-content">
+ <div class="magic-box5">
+  <p>Somewhere inside, a final pulse seems to rise:</p>
+      <p><span class="special2"> 
+      "Remember me. I have seen the darkness, I have endured the void. Witness my existence, traveler… and carry my story with you.🪴"</span>
+    </p>
+
+    <p>
+      Tears well up despite the frozen expanse ❄️💧.<br>
+      You feel the solitude, the beauty, the quiet defiance of this world.
+      You cannot linger forever; the frontier stretches endlessly, and the next dwarf planet waits—this time closer to the warmth of the inner Solar System.
+    </p>
+
+    <p>
+      <strong>You take one last glance, imprinting the reddish glow, the frozen plains, the solitude, deep into your memory🌈.</strong>
+      Makemake’s quiet gaze lingers in your heart, a solemn reminder that the universe holds stories not of kings or rulers, but of survivors, exiles, and silent watchers 🌌💫.
+    </p>
+
+    <p>
+      Far ahead, in the shadowed distance, a new light beckons—the hidden water world of Ceres 🌑💧, whispering its secrets from the asteroid belt.</p>
+      <p>
+<strong>  Your journey continues…</strong> <br>
+    But you know, somewhere in the silence of space, <strong>Makemake watches, remembered and honored 🌟✨.</strong></span>
+    </p>
+
+  
+    </div>
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page29 lazy-bg" data-page="29" data-bg="ceres.webp" style="background-position: center; background-size: 100% 100%;">
+  
+ <div class="page-content1">
+      <span class="story-titlec"> GATE 6 </span>
+    <span class="story-subtitlec">Ceres –The Hidden Water World 🔵🫧</span>
+
+</div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page30 lazy-bg" data-page="30" data-bg="ceres.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+  <div class="chapter-content">
+     <div class="magic-box6">
+      <span class="head"> Ceres <br>
+        The Hidden Water World 🔵🌊</span>
+
+    <p>
+      <span class="dropcap">Y</span>ou drift onward, <strong>leaving Makemake’s quiet radiance behind 🌟✨.</strong>
+      Your chest still heaves from the emotional weight, the awe, the silent connection to a world that endured in solitude.
+      Yet the frontier does not pause for reflection—the Kuiper Belt thins, the light shifts, and your path curves toward the inner edge of the Solar System. Somewhere ahead, a softer glow beckons, warmer, yet still mysterious 🌑💧.
+    </p>
+
+    <p>
+    <span class="special3">Ceres🔵🫧</span>
+    </p>
+
+    <p>
+      The first thing you notice is subtle: a gentle shimmer, pale blue and white, faint but persistent🔵.
+      Unlike the distant, isolated dwarf planets you’ve encountered, <strong>Ceres feels alive in a different way</strong>—not through defiance, not through chaos, but through quiet possibility✨.</p>
+      <p>
+      You realize it is <strong>closer to the Sun😀☀️</strong>, orbiting between Mars and Jupiter, in the heart of the <span class="special">Asteroid belt</span> 🚀.
+      Its presence is almost Hidden, easily overlooked —</p>
+      <p><span class="special1">But..to the trained eye, it is a world of secrets and hope..👁✨</span>
+    </p>
+
+     
+</div>
+</div>
+</div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page31 lazy-bg" data-page="31" data-bg="ceres.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+ <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box6">
+  <p>
+      Your steps Slow....
+      <span class="special1"> Something in the shimmer draws you near🌒.</span>  And as you approach, the surface reveals itself: a landscape of ancient craters, ridges, and icy plains, glinting faintly under the distant Sun 🌞❄️. 
+      But the most extraordinary feature lies beneath the crust: water. Liquid, hidden, preserved for billions of years 💧🌊.Ceres is the<strong> only</strong> dwarf planet <span class="highlight"> so close, so small, yet holding such a profound secret.</span> </p>
+
+     <p> A thought drifts through your mind, echoing like a whisper from the planet itself:
+    </p>
+
+    <p>
+       <span class="special3">
+      "I carry life where none expected it. I am quiet, yet I endure. Will you notice, traveler? Will you remember?"</span>
+    </p>
+
+    <p>
+      You feel compelled to look closer. Bright spots shimmer within the craters, patches of salt and ice reflecting sunlight, glinting like stars fallen to the surface.
+    Some scientists on Earth called them <strong>“mysterious”</strong> before spacecraft revealed their nature—but here, in your presence, they feel alive..Like Ceres is breathing, pulsing with memory and possibility 🌌💎.</p>
+    <p>
+      <span class="highlight">Your body feels lighter here.</span> The nausea, the dizziness, the chaos of Haumea, the solemn solitude of Makemake — all melt into a steady rhythm as you hover above this <span class="special1">Water World.</span> There is a gentleness here, <span class="special1"> an invitation to listen and witness.</span>
+    </p>
+
+
+</div>
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page32 lazy-bg" data-page="32" data-bg="ceres.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+ <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box6">
+ 
+
+      <p>
+      And then you feel it: the gravity, subtle yet insistent, reminding you that this small world <strong>still holds you, still draws you close.</strong></p>
+      <p>
+      It is protective, almost maternal, guarding the frozen oceans beneath its crust, secrets of potential life, frozen memories of the Solar System’s earliest days 💖❄️.
+    </p>
+
+    <p>
+      You whisper back, almost involuntarily🗣:
+    </p>
+
+    <p>
+      <span class="special1">"I see you, Ceres..👩🏻‍🚀 I honor your endurance.. I will carry your story....💞"</span>
+      
+    </p>
+
+    <p>
+      For a heartbeat, the shimmer seems to brighten, a quiet acknowledgment. <br>
+      This is not a chaotic spin, not a solitary radiance—but a profound test of empathy, of attention, of respect. You realize the frontier has changed you: you are no longer a mere observer.</p>
+      <p> <span class="special3">You are a Participant, a Witness, and a Storyteller yourself 💫....</span>
+    </p>
+    
+      <p>
+      <strong>Ceres</strong> spins <span class="special1">slowly,</span> deliberately, rotating <span class="special1"> every nine hours ⏱️...</span>
+      Its orbit, nestled between the giants, seems calm, predictable, yet beneath its surface lies the unexpected😶. Water, ice, salts, possibly organic molecules—life’s potential preserved in silence 🌊🧬. </p>
+   
+</div>
+</div>
+</div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page33 lazy-bg" data-page="33" data-bg="ceres.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+ <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box6">
+
+    <p><span class="special1">No moons</span>  accompany it closely, yet it feels surrounded by guardianship—the asteroid belt itself, a vast crowd keeping watch, silent witnesses to Ceres’ quiet dignity😊.</p>
+     
+      <p>
+      You took one last look, imprinting the pale blues, the shimmering craters, the hidden oceans deep into your memory. </p>
+      
+      <p><strong>The journey continues…</strong></p>
+      <p>
+         Beyond the asteroid belt, beyond the known, toward worlds of ice and shadow you have yet to meet 🌌✨.
+    </p>
+
+    <p>
+     <strong> But</strong> somewhere in the quiet of space..</p>
+
+      <p><span class="special2">You feel Ceres watching... Trusting you to carry its secret....</span></p>
+    <P><strong> A gentle reminder that,</strong><br>
+       <p><span class="special1">Not all stories roar...<br>
+        Some whisper, waiting for those willing to listen...🌑💧
+</span>    </p>
+
+   
+  </div>
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<div class="page page34 lazy-bg" data-page="34" data-bg="ending.webp" style="background-position: center; background-size: 100% 100%;">
+  <div class="page-content1">
+      <span class="story-titlef">GATE 7  </span>
+    <span class="story-subtitlef">The Council of the Misfit Legends </span>
+</div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+<div class="page page35 lazy-bg" data-page="35" data-bg="end.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+  <div class="chapter-content">
+ <div class="magic-box7">
+    
+       <span class="head">🌌 The Council of the Misfit Legends 🌌</span> 
+    
+
+    <p>
+      The Kuiper Belt stretches endlessly behind you 🌌❄️, a silent river of ice and shadow.
+       You sit upon the icy expanse, letting the vacuum cradle you. 
+       The cold bites softly, but it is nothing compared to the storm of emotions inside you 🌑💫. 
+       </p>
+
+       <p>You feel the weight of all you have seen.....<br></p>
+       <p>
+        The fury of<strong> Haumea🫨❤️‍🔥</strong>,<br> 
+        The solitude of <strong>Makemake😬🤎</strong>,<br>
+         The sorrow of <strong>Pluto🥺💔</strong>,<br> 
+         The icy defiance of <strong>Eris🥶🤍</strong>,<br> 
+         and The hidden hope of <strong>Ceres🥹❤️‍🩹</strong> 🌑💫. </p>
+         <p>
+
+       Each dwarf planet lingers in your memory like a heartbeat💓, a pulse of the universe that refuses to be ignored⚠️.
+    </p>
+    <p class="story council-text">
+     <strong> And then… a convergence.</strong>
+    </p>
+  
+</div>
+</div>
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+<div class="page page36 lazy-bg" data-page="36" data-bg="end.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+ <div class="magic-box7">
+  <p>
+      Somehow, across the vastness of the frontier, the distant lights glimmer faintly, <span class="special1">all five of them appear before your eyes. </span>  Not physically together — they do not need to be—but their presence floods the void. Shadows and glimmers, spins and quiet lights, each world radiating its essence into the same space.</p>
+      <p> <strong>From this distance, you can see them together. You feel them all at once…</strong></p>
+    </p>
+
+    <div class="box">
+    <p>🌑🥺 Pluto — The exiled king, sorrowful yet proud 💔❄️</p>
+    <p>🌒🥵 Eris — The shadow queen, daring and untamed 💀</p>
+    <p>💫🫨 Haumea — The tumbling world, chaos and resilience spun into ellipsoidal perfection 🌀</p>
+    <p>🌟😴 Makemake — The solitary radiant, glowing with quiet endurance in pale orange-red ✨</p>
+    <p>🌑😇 Ceres — The hidden water world, gentle and protective, whispering secrets of life 💧</p>
+</div>
+ <p class="council-conclusion">
+   <strong> The frontier pauses.</strong> You breathe in the weight of it all... </p>
+    <p class="council-conclusion">
+   The <span class="special1">Misfit Legends</span> of the Kuiper Belt have <strong>shown you</strong> that..<br>
+   <strong> The Universe is Alive — </strong> <br>
+    <span class="highlight">Each world a voice, a heartbeat, a story that deserves witness.</span></p>
+
+
+
+</div>
+    </div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+<div class="page page37 lazy-bg" data-page="37" data-bg="end.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box7">
+  
+
+     <p> <span class="special2">Your journey has reached a horizon, but the echoes of these worlds  
+    will follow you forever 🌌✨.
+  </p></span>
+    <p >
+      A thought drifts across your mind, almost a voice in the darkness:
+    </p>
+
+    <p class="story page37-quote">
+      "We are the misfit legends🌕.. Forgotten by some, feared by others, yet we endure.. Witness us… and remember..📍"
+    </p>
+
+    <p >
+      You feel a wave of emotion: awe, reverence, humility, and something bittersweet🥺. They are not rulers, not conquerors — <span class="highlight"> they are survivors, storytellers, guardians of forgotten histories.</span> You realize that their exile is their wisdom, their solitude their strength, their chaos their beauty..💖
+    </p>
+
+    <p>
+      <strong>For a moment,</span> <br>
+  You are Suspended in Time🕛,</strong> hovering in the middle of the void, heart racing ❤️‍🩹💫. </p>
+      <p>And then, each world seems to reach out in its own way, not with words, But with <span class="highlight">PRESENCE.....🍃❣️</span>
+    </p>
+
+
+  </div>
+</div>
+
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+<div class="page page38 lazy-bg" data-page="38" data-bg="end.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+<div class="chapter-content">
+ <div class="magic-box7">
+  <span class="head">FINAL GATE - A Promise in the Dark</span>
+      <p>
+      <strong>Tears</strong>  well in your eyes..<br> You understand now that your journey was <strong>never just about space</strong> — it was about listening, feeling, and <strong>Remembering🥀....</strong> You are the <span class="special1">first Earthling to truly meet them💫...</span> not as scientists or observers, <strong>but as a witness to their stories📜☘️</strong>.
+    </p>
+
+  <div class="planet-voices">
+  <div class="pluto-voice">🌑 Pluto: I may be small, but my heart is icy and strong.</div>
+  <div class="eris-voice">❄️ Eris: I stir cosmic debates from the shadows.</div>
+  <div class="haumea-voice">💫 Haumea: I spin so fast, I stretch into strange shapes.</div>
+  <div class="makemake-voice">🔥 Makemake: I glow faintly in the distant dark.</div>
+  <div class="ceres-voice">🌱 Ceres: I carry secrets of water and hidden life.</div>
+</div>
+
+    <p>
+    <strong>  A small thought forms—a final message, almost a prayer :</strong>
+    </p>
+
+    <p class="story page38-quote">
+      "Thank you for surviving🌼🍀. Thank you for enduring💫. Thank you for teaching me to see, to feel, to honor❤️‍🔥."
+    </p>
+
+  
+
+    </div>
+
+  </div>
+
+
+
+</div>
+  <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+
+
+
+
+<div class="page page39 lazy-bg" data-page="39" data-bg="ending.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+    <div class="chapter-content">
+ <div class="magic-box7">
+  
+        <p><strong>And then,</strong> </p>
+      <p>You float forward, heart heavy, yet full. <br>
+        Somewhere in the infinite dark, <strong>each dwarf planet continues its lonely vigil</strong> ❄️.
+        Yet you know this: by carrying their stories, their truths, their triumphs and sorrows, you make them immortal💖.
+    </p>
+
+
+         <p >
+      The frontier stretches on, endless and mysterious, yet you feel a quiet warmth in your chest. </p>
+      <p>
+      <strong>The misfit legends are out there, alive, waiting, enduring.</strong> </p>
+      <p><span class="special2">And now, so are you......😃💖✨</span>
+    </p>
+    
+    <p > As your ship drifts into the next shadowed corridor of the Solar System,one thought lingers: <span class="special2">" The Universe is not just matter and motion — it is Memory, Story, and Soul....💐 "</span></p>
+      <p>And in the Kuiper Belt, the Asteroid belt, and beyond, <strong>the misfit legends continue to Whisper, Spin, and Shine…</strong></p>
+
+       <p class="story page39-quote">
+For anyone willing to truly see......🌞🌈
+    </p>
+        
+ <!-- Interactive Final Message Box -->
+   <div class="final-message-box-container">
+  
+  <!-- Floating Icon -->
+  <div class="magic-letter-icon" onclick="misfit_openMessageBox()">
+    <img src="au.png" alt="Magic Letter" class="letter-image">
+  </div>
+
+ <!-- Hidden Popup -->
+<div class="final-message-popup" id="finalMessageBox">
+  <p class="legendary-quote">
+    "Not every message is meant for Earth… Yet every traveler leaves a mark—written not only in stone, but in starlight too..  
+    Though the book closes here, your voice can still sail across the cosmos, riding the winds of forgotten worlds.  
+    Will you entrust a final secret to the Misfit Legends, that they may guard it for all time?"
+  </p>
+
+
+<div class="final-message-box">
+  <form id="misfitMessageForm" onsubmit="misfit_submitMessage(event)">
+    <textarea name="message" class="user-message" placeholder="Write your message here..." required></textarea>
+    <button type="submit" class="send-btn">Send</button>
+  </form>
+</div>
+</div>
+
+
+</div>
+
+
+
+</div>
+    </div>
+  </div>
+    <button class="back-btn" onclick="prevPage()"></button>
+  <button class="page-btn" onclick="nextPage()"></button>
+</div>
+
+
+<script>
+function misfit_openMessageBox() {
+  document.getElementById("finalMessageBox").classList.add("open");
+}
+
+function misfit_submitMessage(e) {
+  e.preventDefault();
+
+  let textarea = document.querySelector("#misfitMessageForm .user-message");
+  let message = textarea.value.trim();
+
+  if (message === "") {
+    alert("Please write a message first 💌");
+    return;
+  }
+
+  // --- Show Loading GIF ---
+  let loading = document.createElement("div");
+  loading.className = "loading-popup";
+  loading.innerHTML = `<img src="200w.gif" alt="Sending..." class="loading-gif">`; 
+  document.body.appendChild(loading);
+
+  // Send via EmailJS
+  emailjs.sendForm("service_6vksf2k", "template_xmycd4q", "#misfitMessageForm")
+    .then(function(response) {
+      // Remove loading
+      loading.remove();
+
+      // Close the box
+      document.getElementById("finalMessageBox").classList.remove("open");
+
+      // --- Success GIF Popup ---
+      let popup = document.createElement("div");
+      popup.className = "sent-popup";
+      popup.innerHTML = `<img src="300.gif" alt="Success" class="success-gif">`;
+      document.body.appendChild(popup);
+
+      setTimeout(() => { popup.remove(); }, 2500);
+
+      // Reset form
+      textarea.value = "";
+    }, function(error) {
+      alert("❌ Failed to send message. Please try again!");
+      console.error("EmailJS error:", error);
+    });
+}
+</script>
+
+
+
+
+
+
+<div class="page page40 lazy-bg" data-page="40" data-bg="ending.webp" style="background-position: center; background-size: 100% 100%;">
+ 
+  <div class="page-content">
+    <div class="chapter-content">
+
+
+ <div class="author-note">
+        <p> BY AUTHOR  <br>
+        <p>✦·┈๑⋅⋯ 𓂃✍︎ ⋯⋅๑┈·✦</p>
+
+      <p class="note-text"> “<bold>👩🏻‍🚀💖Little traveler....,</bold> you have walked among the forgotten worlds🙂🪐.<br>
+         You have felt Pluto’s grief, Haumea’s chaos, Makemake’s solitude, and all the stories of the exiles🔥🌈.
+         </p>
+          <p class="note-text">
+         Their memories are yours now—their voices echo in your heart forever💕.<br>
+         The exiles have whispered their truths🌝🌺,<br>
+          and now you carry them ☘️... <strong>A TRAVELER </strong>  bound to Remember, bound to Honor their lonely beauty🌝⭐️.” </p>
+         
+          
+      <p>-The End ◡̈ 💫-</p>
+</div>
+       𓂃˖˳·˖ ִֶָ ⋆🌷͙⋆ ִֶָ˖·˳˖𓂃 ִֶָ
+    
+
+    </div>
+    </div>
+
+<div class="book-scene">
+  <button class="restart button" onclick="restartBook()">Restart Book</button>
+</div>
+
+</div>
+
+
+
+   
+  </div>
+ <div class="book-base"></div>
+</div>
+
+
+  
+<script defer>
+// ===== Setup =====
+const book = document.getElementById("book");
+const pages = document.querySelectorAll(".page");
+let currentPage = 0;
+
+// Hide all page content initially
+pages.forEach(p => {
+  const content = p.querySelector(".page-content");
+  if (content) {
+    content.style.opacity = "0";
+    content.style.transform = "translateY(20px)";
+  }
+});
+
+// ===== Lazy Load Backgrounds =====
+const lazyBackgrounds = document.querySelectorAll(".lazy-bg");
+const bgObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bg = entry.target.getAttribute("data-bg");
+      entry.target.style.backgroundImage = `url('${bg}')`;
+      bgObserver.unobserve(entry.target);
+    }
+  });
+});
+lazyBackgrounds.forEach(bg => bgObserver.observe(bg));
+
+// ===== Reveal Page Content =====
+function showPageContent(pageElement) {
+  const content = pageElement.querySelector(".page-content");
+  if (content) {
+    setTimeout(() => {
+      content.style.transition = "opacity 1s ease, transform 1s ease";
+      content.style.opacity = "1";
+      content.style.transform = "translateY(0)";
+    }, 400);
+  }
+}
+
+// ===== Page Navigation =====
+function nextPage() {
+  if (currentPage < pages.length - 1) {
+    const current = pages[currentPage];
+    const next = pages[currentPage + 1];
+    current.classList.add("turned");
+    next.classList.remove("hidden");
+    currentPage++;
+    createMagicDust();
+    showPageContent(next);
+  }
+}
+
+function prevPage() {
+  if (currentPage > 0) {
+    const current = pages[currentPage];
+    const prev = pages[currentPage - 1];
+    current.classList.remove("turned");
+    currentPage--;
+    createMagicDust();
+    showPageContent(prev);
+  }
+}
+
+// ===== Keyboard Navigation =====
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowRight") nextPage();
+  else if (event.key === "ArrowLeft") prevPage();
+});
+
+// ===== Restart Book =====
+
+function restartBook() {
+  isResetting = true;
+  disablePageTransitions();
+
+  pages.forEach(p => p.classList.remove('turned'));
+  currentPage = 0;
+  book.classList.remove('opened');
+
+  setTimeout(() => {
+    enablePageTransitions();
+    isResetting = false;
+  }, 600);
+}
+
+
+document.querySelector('.cover button').addEventListener('click', function () {
+  book.classList.add('opened');
+  createMagicDust();
+});
+
+
+let isResetting = false;
+function createMagicDust() {
+  if (isResetting) return; // Skip dust during reset
+
+  const container = document.querySelector(".magic-dust-container");
+  const total = 30;
+  for (let i = 0; i < total; i++) {
+    const sparkle = document.createElement("div");
+    const types = ["star", "orb", "dust"];
+    const type = types[Math.floor(Math.random() * types.length)];
+    sparkle.classList.add("sparkle", type);
+    sparkle.style.left = Math.random() * 100 + "%";
+    sparkle.style.top = (50 + Math.random() * 30) + "%";
+    sparkle.style.animationDuration = (1.5 + Math.random() * 1.5) + "s";
+    sparkle.style.animationDelay = (Math.random() * 0.5) + "s";
+    container.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 2500);
+  }
+}
+
+function disablePageTransitions() {
+  pages.forEach(p => p.style.transition = "none");
+}
+function enablePageTransitions() {
+  pages.forEach(p => p.style.transition = "");
+}
+
+
+document.querySelector(".book-scene").addEventListener("click", () => {
+  createMagicDust();
+});
+
+// ===== Page Numbers =====
+document.querySelectorAll('.page:not(.cover)').forEach((page, index) => {
+  const num = document.createElement('div');
+  num.classList.add('page-number');
+  num.innerText = index + 1;
+  page.appendChild(num);
+});
+
+// ===== Canvas Animation =====
+const canvas = document.getElementById("magic-stars");
+const ctx = canvas.getContext("2d");
+canvas.width = canvas.offsetWidth;
+canvas.height = canvas.offsetHeight;
+
+const stars = [];
+const dust = [];
+
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+for (let i = 0; i < 50; i++) {
+  dust.push({
+    x: random(0, canvas.width),
+    y: random(0, canvas.height),
+    radius: random(1, 4),
+    speedX: random(-0.3, 0.3),
+    speedY: random(-0.3, 0.3),
+    alpha: random(0.2, 0.6)
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(star => {
+    star.alpha += star.delta;
+    if (star.alpha > 1 || star.alpha < 0.3) star.delta *= -1;
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+    ctx.fill();
+  });
+  dust.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.x > canvas.width) p.x = 0;
+    if (p.y < 0) p.y = canvas.height;
+    if (p.y > canvas.height) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const pages = document.querySelectorAll(".book .page");
+  const totalPages = pages.length;
+
+  pages.forEach((page, index) => {
+    // Stack order
+    page.style.zIndex = totalPages - index;
+
+    // Slight spacing for thickness illusion
+    page.style.left = `${index * 0.6}px`;
+
+    // Shadow depth depending on page number
+    page.style.boxShadow = `0 0 ${3 + index}px rgba(0,0,0,0.20)`;
+  });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const pages = document.querySelectorAll(".book .page");
+  const totalPages = pages.length;
+
+  pages.forEach((page, index) => {
+    // Stack order
+    page.style.zIndex = totalPages - index;
+
+    // Slight spacing for thickness illusion
+    page.style.top = `${index * 0.6}px`;
+
+    
+  });
+});
+
+  // ===== Layered Shadows for Realistic Depth =====
+  pages.forEach((page, index) => {
+    const depth = index * 2;
+    page.style.boxShadow.right = `
+      inset -2px 0 6px rgba(0,0,0,0.15),
+      inset 0 -2px 6px rgba(0,0,0,0.1),
+      ${depth}px 0 ${depth+4}px rgba(0,0,0,0.35)
+    `;
+  });
+
+
+    pages.forEach(page => {
+    const highlight = document.createElement('div');
+    highlight.style.position = 'absolute';
+    highlight.style.inset = '0';
+    highlight.style.pointerEvents = 'none';
+    highlight.style.background = 'linear-gradient(to right, rgba(255,255,255,0.05), transparent 60%)';
+    highlight.style.zIndex = '20';
+    page.appendChild(highlight);
+  });
+
+ 
+
+    // ===== Add Z-axis stacking for ultra 3D depth =====
+  pages.inside((page, index) => {
+    page.style.transform += ` translateZ(${index * 0.8}px)`;
+    page.style.transition = 'transform 1s cubic-bezier(0.65, 0, 0.35, 1), box-shadow 0.6s ease';
+  });
+
+
+
+pages.forEach((p, i) => {
+  setTimeout(() => p.classList.remove('turned'), i * 50); // 50ms delay between each
+});
+
+
+
+  </script>
+
+
+
+
+</body>
+</html>
