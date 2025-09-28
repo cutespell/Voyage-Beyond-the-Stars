@@ -2480,7 +2480,7 @@ background: url(lll.webp);
 /* Button styling */
 .restart.button {
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   right: 26px;
   padding: 8px 16px; /* keep original size */
   background: #510303ab;
@@ -2523,4 +2523,5 @@ background: url(lll.webp);
     padding: 0 15px;
   }
 }
+
 
