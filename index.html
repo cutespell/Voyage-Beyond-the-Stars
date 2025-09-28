@@ -2004,8 +2004,7 @@ function misfit_submitMessage(e) {
 
   
 <script defer>
-const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-  
+
 // ===== Setup =====
 const book = document.getElementById("book");
 const pages = document.querySelectorAll(".page");
@@ -2260,18 +2259,7 @@ pages.forEach((p, i) => {
 
 
 
-if (isMobile) {
-  // Disable canvas animation
-  const canvas = document.getElementById("magic-stars");
-  if (canvas) canvas.style.display = "none";
 
-  // Reduce sparkle count
-  sparkleCount = 10;
-
-  // Simplify book transform
-  const book = document.getElementById("book");
-  if (book) book.style.transform = "none";
-}
 
   
 
@@ -2282,5 +2270,6 @@ if (isMobile) {
 
 </body>
 </html>
+
 
 
