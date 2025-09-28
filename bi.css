@@ -2,7 +2,8 @@
 body {
   margin: 0;
   padding: 0 15px;
-  background: #111;
+  background:url(C5.jpg);
+  background-size: 100% 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -2523,5 +2524,6 @@ background: url(lll.webp);
     padding: 0 15px;
   }
 }
+
 
 
